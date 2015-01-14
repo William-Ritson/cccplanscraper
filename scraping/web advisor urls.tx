@@ -1,0 +1,97 @@
+from american
+to ucsc
+major bs cs
+
+http://web1.assist.org/cgi-bin/REPORT_2/Rep2.pl
+?aay=13-14
+&dora=CMPSBS
+&oia=UCSC
+&ay=14-15
+&event=19
+&ria=UCSC
+&agreement=aa
+&sia=ARC
+&ia=ARC
+&dir=1&
+&sidebar=false
+&rinst=left
+&mver=2
+&kind=5
+&dt=2
+
+from cabrillo
+to ucsc
+major bs cs
+
+http://web1.assist.org/cgi-bin/REPORT_2/Rep2.pl
+?aay=13-14
+&dora=CMPSBS
+&oia=UCSC
+&ay=14-15
+&event=19
+&ria=UCSC
+&agreement=aa
+&ia=CABRILLO
+&sia=CABRILLO
+&dir=1&
+&sidebar=false
+&rinst=left
+&mver=2
+&kind=5
+&dt=2
+
+from cabrillo
+to ucsc
+major bioinformaticcs
+
+http://web1.assist.org/cgi-bin/REPORT_2/Rep2.pl
+?aay=13-14
+&dora=BIOINFO
+&oia=UCSC
+&ay=14-15
+&event=19
+&ria=UCSC
+&agreement=aa
+&ia=CABRILLO
+&sia=CABRILLO
+&dir=1&
+&sidebar=false
+&rinst=left
+&mver=2
+&kind=5
+&dt=2
+
+
+http://web1.assist.org/cgi-bin/REPORT_2/Rep2.pl
+?aay=14-15
+&oia=UCSD
+&dora=RELIGION, STUDY OF
+&ay=14-15
+&event=19
+&agreement=aa
+&ria=UCSD
+&sia=DAC
+&ia=DAC
+&dir=1&
+&sidebar=false
+&rinst=left
+&mver=2
+&kind=5
+&dt=2
+
+http://web1.assist.org/cgi-bin/REPORT_2/Rep2.pl
+?aay=14-15
+&dora=EECS
+&oia=UCB
+&ay=14-15
+&event=19
+&ria=UCB
+&agreement=aa
+&sia=CABRILLO
+&ia=CABRILLO
+&dir=1&
+&sidebar=false
+&rinst=left
+&mver=2
+&kind=5
+&dt=2

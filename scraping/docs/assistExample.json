@@ -1,0 +1,19 @@
+{
+    "name": "UC Santa Cruz",
+    "degrees": [
+        {
+            "name": "Computer Science, B.S",
+            "reqs": [
+                {
+                    "requirment": {
+                        "and": ["CMPS 12B", "CMPS 12M"]
+                    },
+                    "meets": [
+                        102314,
+                        213123
+                    ]
+                }
+            ]
+        }
+    ]
+}

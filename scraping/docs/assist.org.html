@@ -1,0 +1,4489 @@
+<!-- $Id: layout.jsp,v 1.24.2.1 2013/04/05 23:34:40 bhoogerb Exp $ -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+
+
+
+<html>
+   <head>
+     <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+     <META HTTP-EQUIV="Expires" CONTENT="-1">
+     <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+
+      
+      <title>
+         
+            
+            
+               ASSIST Prompt Page
+            
+         
+      </title> 
+
+      
+      <base href="http://web1.assist.org/web-assist/"/> 
+
+      <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+      <link href='css/2.css' media="all" rel='stylesheet' type='text/css'>
+      <script language="JavaScript" src="javascript/javascript.js" type="text/javascript"></script>
+   </head>
+
+   <body class="nav_bg">
+
+
+
+   <!-- For tabbing ease of use, put the body first -->
+   <!-- $Id: bodyPrompt.jsp,v 1.74.2.16 2014/05/31 00:49:47 bhoogerb Exp $ -->
+
+
+
+  
+  
+     
+  
+
+
+<style>
+         #popup {
+           z-index:5;
+           background-color:#FFFEEA;
+           position:absolute;
+           top:200;
+           left:200;
+           width:300;
+           height:120px;
+           border-style:solid;
+           border-color:#04255C;
+           display:none;
+         }
+
+         #modal {
+           z-index:4;
+           opacity:0.6;
+           background-color:#505050;
+           position:absolute;
+           top:0;
+           left:0;
+           width:1200;
+           height:800px;
+           display:none;
+           }
+</style>
+
+<script type="text/javascript">
+
+// spin.js javascript for making animated spinner that doesn't stop!
+//fgnass.github.com/spin.js#v1.3.3
+!function(a,b){"object"==typeof exports?module.exports=b():"function"==typeof define&&define.amd?define(b):a.Spinner=b()}(this,function(){"use strict";function a(a,b){var c,d=document.createElement(a||"div");for(c in b)d[c]=b[c];return d}function b(a){for(var b=1,c=arguments.length;c>b;b++)a.appendChild(arguments[b]);return a}function c(a,b,c,d){var e=["opacity",b,~~(100*a),c,d].join("-"),f=.01+c/d*100,g=Math.max(1-(1-a)/b*(100-f),a),h=k.substring(0,k.indexOf("Animation")).toLowerCase(),i=h&&"-"+h+"-"||"";return m[e]||(n.insertRule("@"+i+"keyframes "+e+"{0%{opacity:"+g+"}"+f+"%{opacity:"+a+"}"+(f+.01)+"%{opacity:1}"+(f+b)%100+"%{opacity:"+a+"}100%{opacity:"+g+"}}",n.cssRules.length),m[e]=1),e}function d(a,b){var c,d,e=a.style;for(b=b.charAt(0).toUpperCase()+b.slice(1),d=0;d<l.length;d++)if(c=l[d]+b,void 0!==e[c])return c;return void 0!==e[b]?b:void 0}function e(a,b){for(var c in b)a.style[d(a,c)||c]=b[c];return a}function f(a){for(var b=1;b<arguments.length;b++){var c=arguments[b];for(var d in c)void 0===a[d]&&(a[d]=c[d])}return a}function g(a){for(var b={x:a.offsetLeft,y:a.offsetTop};a=a.offsetParent;)b.x+=a.offsetLeft,b.y+=a.offsetTop;return b}function h(a,b){return"string"==typeof a?a:a[b%a.length]}function i(a){return"undefined"==typeof this?new i(a):(this.opts=f(a||{},i.defaults,o),void 0)}function j(){function c(b,c){return a("<"+b+' xmlns="urn:schemas-microsoft.com:vml" class="spin-vml">',c)}n.addRule(".spin-vml","behavior:url(#default#VML)"),i.prototype.lines=function(a,d){function f(){return e(c("group",{coordsize:k+" "+k,coordorigin:-j+" "+-j}),{width:k,height:k})}function g(a,g,i){b(m,b(e(f(),{rotation:360/d.lines*a+"deg",left:~~g}),b(e(c("roundrect",{arcsize:d.corners}),{width:j,height:d.width,left:d.radius,top:-d.width>>1,filter:i}),c("fill",{color:h(d.color,a),opacity:d.opacity}),c("stroke",{opacity:0}))))}var i,j=d.length+d.width,k=2*j,l=2*-(d.width+d.length)+"px",m=e(f(),{position:"absolute",top:l,left:l});if(d.shadow)for(i=1;i<=d.lines;i++)g(i,-2,"progid:DXImageTransform.Microsoft.Blur(pixelradius=2,makeshadow=1,shadowopacity=.3)");for(i=1;i<=d.lines;i++)g(i);return b(a,m)},i.prototype.opacity=function(a,b,c,d){var e=a.firstChild;d=d.shadow&&d.lines||0,e&&b+d<e.childNodes.length&&(e=e.childNodes[b+d],e=e&&e.firstChild,e=e&&e.firstChild,e&&(e.opacity=c))}}var k,l=["webkit","Moz","ms","O"],m={},n=function(){var c=a("style",{type:"text/css"});return b(document.getElementsByTagName("head")[0],c),c.sheet||c.styleSheet}
+(),o={lines:12,length:7,width:5,radius:10,rotate:0,corners:1,color:"#000",direction:1,speed:1,trail:100,opacity:.25,fps:20,zIndex:2e9,className:"spinner",top:"auto",left:"auto",position:"relative"};i.defaults={},f(i.prototype,{spin:function(b){this.stop();var c,d,f=this,h=f.opts,i=f.el=e(a(0,{className:h.className}),{position:h.position,width:0,zIndex:h.zIndex}),j=h.radius+h.length+h.width;if(b&&(b.insertBefore(i,b.firstChild||null),d=g(b),c=g(i),e(i,{left:("auto"==h.left?d.x-c.x+(b.offsetWidth>>1):parseInt(h.left,10)+j)+"px",top:("auto"==h.top?d.y-c.y+(b.offsetHeight>>1):parseInt(h.top,10)+j)+"px"})),i.setAttribute("role","progressbar"),f.lines(i,f.opts),!k){var l,m=0,n=(h.lines-1)*(1-h.direction)/2,o=h.fps,p=o/h.speed,q=(1-h.opacity)/(p*h.trail/100),r=p/h.lines;!function s(){m++;for(var a=0;a<h.lines;a++)l=Math.max(1-(m+(h.lines-a)*r)%p*q,h.opacity),f.opacity(i,a*h.direction+n,l,h);f.timeout=f.el&&setTimeout(s,~~(1e3/o))}()}return f},stop:function(){var a=this.el;return a&&(clearTimeout(this.timeout),a.parentNode&&a.parentNode.removeChild(a),this.el=void 0),this},lines:function(d,f){function g(b,c){return e(a(),{position:"absolute",width:f.length+f.width+"px",height:f.width+"px",background:b,boxShadow:c,transformOrigin:"left",transform:"rotate("+~~(360/f.lines*j+f.rotate)+"deg) translate("+f.radius+"px,0)",borderRadius:(f.corners*f.width>>1)+"px"})}for(var i,j=0,l=(f.lines-1)*(1-f.direction)/2;j<f.lines;j++)i=e(a(),{position:"absolute",top:1+~(f.width/2)+"px",transform:f.hwaccel?"translate3d(0,0,0)":"",opacity:f.opacity,animation:k&&c(f.opacity,f.trail,l+j*f.direction,f.lines)+" "+1/f.speed+"s linear infinite"}),f.shadow&&b(i,e(g("#000","0 0 4px #000"),{top:"2px"})),b(d,b(i,g(h(f.color,j),"0 0 1px rgba(0,0,0,.1)")));return d},opacity:function(a,b,c){b<a.childNodes.length&&(a.childNodes[b].style.opacity=c)}});var p=e(a("group"),{behavior:"url(#default#VML)"});return!d(p,"transform")&&p.adj?j():k=d(p,"animation"),i});
+
+window.onpageshow = function(event) {resetCombo(event)}
+window.onload = function(event) {resetCombo(event)}
+window.onunload = function(){};
+  
+         function makenormal(loc) {
+            var modal=document.getElementById("modal");
+            modal.style.display="none";
+            var popup=document.getElementById("popup");
+            popup.style.display="none";
+            alert ("TIMEOUT ERROR : The system appears to be running exceedingly slow.  Please contact ASSIST staff for technical support");
+         }
+
+         function requestPage(loc) {
+           window.location=loc;
+           setTimeout(function() {makenormal()}, 240000);
+         }
+
+         function makewait(dest) {
+            var modal=document.getElementById("modal");
+            modal.style.display="block";
+            var popup=document.getElementById("popup");
+            popup.style.display="block";
+            var opts = {
+              lines: 11, // The number of lines to draw
+              length: 6, // The length of each line
+              width: 4, // The line thickness
+              radius: 6, // The radius of the inner circle
+              corners: 1, // Corner roundness (0..1)
+              rotate: 0, // The rotation offset
+              direction: 1, // 1: clockwise, -1: counterclockwise
+              color: '#000', // #rgb or #rrggbb or array of colors
+              speed: 1, // Rounds per second
+              trail: 43, // Afterglow percentage
+              shadow: false, // Whether to render a shadow
+              hwaccel: false, // Whether to use hardware acceleration
+              className: 'spinner', // The CSS class to assign to the spinner
+              zIndex: 2e9, // The z-index (defaults to 2000000000)
+              top: 'auto', // Top position relative to parent in px
+              left: 'auto' // Left position relative to parent in px
+            };
+            var target = document.getElementById('pleasewait');
+            var spinner = new Spinner(opts).spin(target);
+            setTimeout(function() {requestPage(dest)}, 100);
+         }
+
+  function resetCombo(event) {
+
+       // hide red line about C-ID if any inst is a UC
+       var dropdown = document.getElementById('ia');
+       var first=dropdown.value;
+       dropdown = document.getElementById('oia');
+       var second=dropdown.value;
+
+       var red=true;
+       var red1;
+       var red2;
+
+       if ((first.indexOf("&ia=UC") != -1) ||
+           (second.indexOf("&oia=UC") != -1) ||
+            (first.indexOf("UC") == 0) ||
+            (second.indexOf("UC") == 0))
+         red = false;
+
+       red1 = ((first.indexOf("&ia=UC") == -1) &&
+                (first.indexOf("UC") != 0));
+       red2 = ((second.indexOf("&oia=UC") == -1) &&
+                (second.indexOf("UC") != 0));
+         
+       if (red)
+          document.getElementById('cidnote').style.display = 'block'; 
+       else
+          document.getElementById('cidnote').style.display = 'none'; 
+
+       var link = document.getElementById('discrad1');
+       if (red1) {
+          document.getElementById('dept1link').style.display = 'block'; 
+          if (link != null) link.style.display = 'visible'; 
+       } else {
+          document.getElementById('dept1link').style.display = 'none'; 
+          if (link != null) link.style.display = 'none'; 
+       }
+
+       if (red2) {
+          var link = document.getElementById('dept2link');
+          if (link != null) link.style.display = 'block'; 
+          link = document.getElementById('discrad2')
+          if (link != null) link.style.display = 'visible'; 
+       } else {
+          var link = document.getElementById('dept2link');
+          if (link != null) link.style.display = 'none'; 
+          link = document.getElementById('discrad2')
+          if (link != null) link.style.display = 'none'; 
+       }
+
+       // reset dropdowns if back button is used.
+       dropdown = document.getElementById('cid_subdiscipline');
+       dropdown.options[0].selected = true;
+       dropdown.disabled = true;
+       dropdown = document.getElementById('cid_discipline');
+       dropdown.options[0].selected = true;
+       if (dropdown.options.length == 1)
+          dropdown.disabled = true;
+     
+       dropdown = document.getElementById('dept1');
+       if (dropdown != null) dropdown.options[0].selected = true;
+       dropdown = document.getElementById('dept2');
+       if (dropdown != null) dropdown.options[0].selected = true;
+       radio = document.getElementsByName("cidgroup");
+       radio[0].checked = true;
+  }
+
+  // create javascript data based on the disciplines and subdisciplines.
+  var currentSchool = 1;
+  var currentSchoolAbbrev = 'ARC';
+  var academicYear="14-15";
+  var disciplines1 = new Array;
+  var x = 0;
+  
+      disciplines1[x++] = new Option('Accounting', '1');
+  
+      disciplines1[x++] = new Option('Administration of Justice', '2');
+  
+      disciplines1[x++] = new Option('Anthropology', '4');
+  
+      disciplines1[x++] = new Option('Art History', '5');
+  
+      disciplines1[x++] = new Option('Biology', '6');
+  
+      disciplines1[x++] = new Option('Business', '8');
+  
+      disciplines1[x++] = new Option('Chemistry', '9');
+  
+      disciplines1[x++] = new Option('Child Development', '11');
+  
+      disciplines1[x++] = new Option('Communication Studies', '12');
+  
+      disciplines1[x++] = new Option('Computer Science', '13');
+  
+      disciplines1[x++] = new Option('Early Childhood Education', '14');
+  
+      disciplines1[x++] = new Option('Economics', '15');
+  
+      disciplines1[x++] = new Option('Education', '16');
+  
+      disciplines1[x++] = new Option('English', '18');
+  
+      disciplines1[x++] = new Option('Geography', '20');
+  
+      disciplines1[x++] = new Option('Geology', '21');
+  
+      disciplines1[x++] = new Option('History', '24');
+  
+      disciplines1[x++] = new Option('Information Technology and Information Systems', '26');
+  
+      disciplines1[x++] = new Option('Journalism', '27');
+  
+      disciplines1[x++] = new Option('Mathematics', '29');
+  
+      disciplines1[x++] = new Option('Music', '30');
+  
+      disciplines1[x++] = new Option('Philosophy', '33');
+  
+      disciplines1[x++] = new Option('Physics', '35');
+  
+      disciplines1[x++] = new Option('Political Science', '36');
+  
+      disciplines1[x++] = new Option('Psychology', '37');
+  
+      disciplines1[x++] = new Option('Sociology', '40');
+  
+      disciplines1[x++] = new Option('Spanish', '41');
+  
+      disciplines1[x++] = new Option('Studio Arts', '42');
+  
+      disciplines1[x++] = new Option('Theatre', '43');
+  
+
+  var disciplines2 = new Array;
+  var x = 0;
+  
+      disciplines2[x++] = new Option('Accounting', '1');
+  
+      disciplines2[x++] = new Option('Administration of Justice', '2');
+  
+      disciplines2[x++] = new Option('Agriculture', '3');
+  
+      disciplines2[x++] = new Option('Anthropology', '4');
+  
+      disciplines2[x++] = new Option('Art History', '5');
+  
+      disciplines2[x++] = new Option('Biology', '6');
+  
+      disciplines2[x++] = new Option('Business', '8');
+  
+      disciplines2[x++] = new Option('Chemistry', '9');
+  
+      disciplines2[x++] = new Option('Child Development', '11');
+  
+      disciplines2[x++] = new Option('Communication Studies', '12');
+  
+      disciplines2[x++] = new Option('Computer Science', '13');
+  
+      disciplines2[x++] = new Option('Early Childhood Education', '14');
+  
+      disciplines2[x++] = new Option('Economics', '15');
+  
+      disciplines2[x++] = new Option('Education', '16');
+  
+      disciplines2[x++] = new Option('Engineering', '17');
+  
+      disciplines2[x++] = new Option('English', '18');
+  
+      disciplines2[x++] = new Option('Film, Television and Electronic Media', '38');
+  
+      disciplines2[x++] = new Option('Geography', '20');
+  
+      disciplines2[x++] = new Option('Geology', '21');
+  
+      disciplines2[x++] = new Option('History', '24');
+  
+      disciplines2[x++] = new Option('Information Technology and Information Systems', '26');
+  
+      disciplines2[x++] = new Option('Journalism', '27');
+  
+      disciplines2[x++] = new Option('Kinesiology', '28');
+  
+      disciplines2[x++] = new Option('Mathematics', '29');
+  
+      disciplines2[x++] = new Option('Music', '30');
+  
+      disciplines2[x++] = new Option('Nutrition/Dietetics', '32');
+  
+      disciplines2[x++] = new Option('Philosophy', '33');
+  
+      disciplines2[x++] = new Option('Physics', '35');
+  
+      disciplines2[x++] = new Option('Political Science', '36');
+  
+      disciplines2[x++] = new Option('Psychology', '37');
+  
+      disciplines2[x++] = new Option('Sociology', '40');
+  
+      disciplines2[x++] = new Option('Spanish', '41');
+  
+      disciplines2[x++] = new Option('Studio Arts', '42');
+  
+      disciplines2[x++] = new Option('Theatre', '43');
+  
+
+  var disciplinesall = new Array;
+  var x = 0;
+  
+      disciplinesall[x++] = new Option('Accounting', '1');
+  
+      disciplinesall[x++] = new Option('Administration of Justice', '2');
+  
+      disciplinesall[x++] = new Option('Agriculture', '3');
+  
+      disciplinesall[x++] = new Option('Anthropology', '4');
+  
+      disciplinesall[x++] = new Option('Art History', '5');
+  
+      disciplinesall[x++] = new Option('Biology', '6');
+  
+      disciplinesall[x++] = new Option('Business', '8');
+  
+      disciplinesall[x++] = new Option('Chemistry', '9');
+  
+      disciplinesall[x++] = new Option('Child Development', '11');
+  
+      disciplinesall[x++] = new Option('Communication Studies', '12');
+  
+      disciplinesall[x++] = new Option('Computer Science', '13');
+  
+      disciplinesall[x++] = new Option('Early Childhood Education', '14');
+  
+      disciplinesall[x++] = new Option('Economics', '15');
+  
+      disciplinesall[x++] = new Option('Education', '16');
+  
+      disciplinesall[x++] = new Option('Engineering', '17');
+  
+      disciplinesall[x++] = new Option('English', '18');
+  
+      disciplinesall[x++] = new Option('Film, Television and Electronic Media', '38');
+  
+      disciplinesall[x++] = new Option('Geography', '20');
+  
+      disciplinesall[x++] = new Option('Geology', '21');
+  
+      disciplinesall[x++] = new Option('History', '24');
+  
+      disciplinesall[x++] = new Option('Information Technology and Information Systems', '26');
+  
+      disciplinesall[x++] = new Option('Journalism', '27');
+  
+      disciplinesall[x++] = new Option('Kinesiology', '28');
+  
+      disciplinesall[x++] = new Option('Mathematics', '29');
+  
+      disciplinesall[x++] = new Option('Music', '30');
+  
+      disciplinesall[x++] = new Option('Nutrition/Dietetics', '32');
+  
+      disciplinesall[x++] = new Option('Philosophy', '33');
+  
+      disciplinesall[x++] = new Option('Physics', '35');
+  
+      disciplinesall[x++] = new Option('Political Science', '36');
+  
+      disciplinesall[x++] = new Option('Psychology', '37');
+  
+      disciplinesall[x++] = new Option('Sociology', '40');
+  
+      disciplinesall[x++] = new Option('Spanish', '41');
+  
+      disciplinesall[x++] = new Option('Studio Arts', '42');
+  
+      disciplinesall[x++] = new Option('Theatre', '43');
+  
+
+  // subdisciplines for university 1
+  var subdisciplines1 = new Object;
+  
+     subdisciplines1['41'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['29'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['27'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['14'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['6'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['1'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['36'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['5'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['16'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['24'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['37'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['33'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['15'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['11'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['40'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['4'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['12'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['30'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['18'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['2'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['20'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['42'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['43'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['21'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['35'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['13'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['26'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['9'] = new Array();
+     x=0;
+     
+  
+     subdisciplines1['8'] = new Array();
+     x=0;
+     
+  
+
+  // subdisciplines for university 2
+  
+    var subdisciplines2 = new Object;
+    
+       subdisciplines2['28'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['3'] = new Array();
+       x=0;
+       
+        subdisciplines2['3'][x++] = new Option('Agricultural Business', '1');
+       
+        subdisciplines2['3'][x++] = new Option('Animal Science', '2');
+       
+        subdisciplines2['3'][x++] = new Option('Plant Science', '7');
+       
+    
+       subdisciplines2['41'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['29'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['27'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['14'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['17'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['36'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['6'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['1'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['5'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['16'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['24'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['37'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['33'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['15'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['11'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['40'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['4'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['12'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['30'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['18'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['2'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['38'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['20'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['42'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['32'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['43'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['21'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['35'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['13'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['26'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['9'] = new Array();
+       x=0;
+       
+    
+       subdisciplines2['8'] = new Array();
+       x=0;
+       
+    
+  
+
+  // subdisciplines for all universities
+  var subdisciplinesall = new Object;
+  
+     subdisciplinesall['28'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['3'] = new Array();
+     x=0;
+     
+      subdisciplinesall['3'][x++] = new Option('Agricultural Business', '1');
+     
+      subdisciplinesall['3'][x++] = new Option('Animal Science', '2');
+     
+      subdisciplinesall['3'][x++] = new Option('Environmental Horticulture', '3');
+     
+      subdisciplinesall['3'][x++] = new Option('Mechanized Agriculture', '6');
+     
+      subdisciplinesall['3'][x++] = new Option('Plant Science', '7');
+     
+  
+     subdisciplinesall['41'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['29'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['27'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['14'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['17'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['36'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['6'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['1'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['5'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['16'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['24'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['37'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['33'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['15'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['11'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['40'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['4'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['12'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['30'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['18'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['2'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['38'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['20'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['42'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['32'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['43'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['21'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['35'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['13'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['26'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['9'] = new Array();
+     x=0;
+     
+  
+     subdisciplinesall['8'] = new Array();
+     x=0;
+     
+  
+
+  updateSubDiscipline(academicYear, currentSchoolAbbrev);
+
+</script>
+
+<br>
+
+  <div id="popup">
+    <br>&nbsp;&nbsp; &nbsp; Please wait while the page loads.
+    <br><br><br>
+    <div id="pleasewait" style="text-align:center"></div><br><br>
+    &nbsp;&nbsp; Thank you for your patience.
+  </div>
+
+  <div id="modal">
+    &nbsp;
+  </div>
+
+<div style="width=100%; height:650px; overflow-y:auto;" id="centercontent"> 
+       
+      
+      
+        
+      
+    
+
+  <!-- onChange the page calls itself to refresh the IA, the AY, 
+       and any other variables necessary to create this page.
+   -->
+  <form name="institution" class="form">
+    <strong>Selected institution and academic year:</strong><br>
+    <!-- The institution name listbox -->
+    <select id="ia" name="ia" size="0" tabindex="" 
+      onChange="javascript:makewait(document.institution.ia.options[document.institution.ia.selectedIndex].value)"
+      onMouseOver="showHelpDiv('helptextINST1')" 
+      onMouseOut="hideHelpDiv('helptextINST1')">
+      <option class="fontsize" value="-1" selected>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        Click here to select an institution</option>
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=AHC" 
+        >
+        Allan Hancock College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=ARC" 
+          
+          SELECTED
+        >
+        American River College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=AVC" 
+        >
+        Antelope Valley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=BAKERFLD" 
+        >
+        Bakersfield College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=BARSTOW" 
+        >
+        Barstow Community College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=BERKELEY" 
+        >
+        Berkeley City College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=BUTTE" 
+        >
+        Butte College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CABRILLO" 
+        >
+        Cabrillo College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUMA" 
+        >
+        California Maritime Academy</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CPP" 
+        >
+        California Polytechnic University, Pomona</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CPSLO" 
+        >
+        California Polytechnic University, San Luis Obispo</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUB" 
+        >
+        California State University, Bakersfield</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUCI" 
+        >
+        California State University, Channel Islands</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUC" 
+        >
+        California State University, Chico</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUDH" 
+        >
+        California State University, Dominguez Hills</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUEB" 
+        >
+        California State University, East Bay</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUFRES" 
+        >
+        California State University, Fresno</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUFULL" 
+        >
+        California State University, Fullerton</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUHAY" 
+        >
+        California State University, Hayward</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSULB" 
+        >
+        California State University, Long Beach</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSULA" 
+        >
+        California State University, Los Angeles</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUMB" 
+        >
+        California State University, Monterey Bay</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUN" 
+        >
+        California State University, Northridge</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUS" 
+        >
+        California State University, Sacramento</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUSB" 
+        >
+        California State University, San Bernardino</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUSM" 
+        >
+        California State University, San Marcos</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CSUSTAN" 
+        >
+        California State University, Stanislaus</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CANADA" 
+        >
+        Canada College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CERRITOS" 
+        >
+        Cerritos College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CERRO" 
+        >
+        Cerro Coso Community College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CHABOT" 
+        >
+        Chabot College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CHAFFEY" 
+        >
+        Chaffey College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CITRUS" 
+        >
+        Citrus College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SFCITY" 
+        >
+        City College of San Francisco</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=COASTLIN" 
+        >
+        Coastline Community College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=ALAMEDA" 
+        >
+        College of Alameda</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MARIN" 
+        >
+        College of Marin</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MATEO" 
+        >
+        College of San Mateo</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CANYONS" 
+        >
+        College of the Canyons</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=DESERT" 
+        >
+        College of the Desert</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=REDWOODS" 
+        >
+        College of the Redwoods</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SEQUOIAS" 
+        >
+        College of the Sequoias</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SISKIYOU" 
+        >
+        College of the Siskiyous</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=COLUMBIA" 
+        >
+        Columbia College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=COMPTON" 
+        >
+        Compton Community College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CONTRA" 
+        >
+        Contra Costa College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=COPPER" 
+        >
+        Copper Mountain College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CRC" 
+        >
+        Cosumnes River College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CRAFTON" 
+        >
+        Crafton Hills College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CUESTA" 
+        >
+        Cuesta College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CUYAMACA" 
+        >
+        Cuyamaca College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CYPRESS" 
+        >
+        Cypress College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=DQUNIV" 
+        >
+        D-Q University</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=DAC" 
+        >
+        De Anza College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=DIABLO" 
+        >
+        Diablo Valley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LAEC" 
+        >
+        East Los Angeles College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=CAMINO" 
+        >
+        El Camino College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=EVERGRN" 
+        >
+        Evergreen Valley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=FEATHER" 
+        >
+        Feather River College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=FOLSOM" 
+        >
+        Folsom Lake College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=FOOTHILL" 
+        >
+        Foothill College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=FRESNO" 
+        >
+        Fresno City College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=FULLRTON" 
+        >
+        Fullerton College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=GAVILAN" 
+        >
+        Gavilan College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=GLENDALE" 
+        >
+        Glendale Community College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=GWC" 
+        >
+        Golden West College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=GMCC" 
+        >
+        Grossmont College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=HARTNELL" 
+        >
+        Hartnell College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=HSU" 
+        >
+        Humboldt State University</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=IMPERIAL" 
+        >
+        Imperial Valley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=IRVINE" 
+        >
+        Irvine Valley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=KRC" 
+        >
+        Kings River College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=TAHOE" 
+        >
+        Lake Tahoe Community College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LANEY" 
+        >
+        Laney College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=POSITAS" 
+        >
+        Las Positas College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LASSEN" 
+        >
+        Lassen Community College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LBCC" 
+        >
+        Long Beach City College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LACC" 
+        >
+        Los Angeles City College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LAHC" 
+        >
+        Los Angeles Harbor College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LAMC" 
+        >
+        Los Angeles Mission College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LAPC" 
+        >
+        Los Angeles Pierce College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LASC" 
+        >
+        Los Angeles Southwest College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LATT" 
+        >
+        Los Angeles Trade Technical College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LAVC" 
+        >
+        Los Angeles Valley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MEDANOS" 
+        >
+        Los Medanos College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MARYMONT" 
+        >
+        Marymount California University</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MARYMONT" 
+        >
+        Marymount College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MENDOCIN" 
+        >
+        Mendocino College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MERCED" 
+        >
+        Merced College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MERRITT" 
+        >
+        Merritt College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MIRACSTA" 
+        >
+        MiraCosta College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MISSION" 
+        >
+        Mission College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MODESTO" 
+        >
+        Modesto Junior College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MONTEREY" 
+        >
+        Monterey Peninsula College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MOORPARK" 
+        >
+        Moorpark College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MVC" 
+        >
+        Moreno Valley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MTSAC" 
+        >
+        Mount San Antonio College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MTSJC" 
+        >
+        Mt. San Jacinto College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=NAPA" 
+        >
+        Napa Valley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=NORCO" 
+        >
+        Norco College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=OHLONE" 
+        >
+        Ohlone College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=OCC" 
+        >
+        Orange Coast College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=OXNARD" 
+        >
+        Oxnard College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=PALOVRDE" 
+        >
+        Palo Verde College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=PALOMAR" 
+        >
+        Palomar College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=PASADENA" 
+        >
+        Pasadena City College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=PORTER" 
+        >
+        Porterville College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=RSC" 
+        >
+        Rancho Santiago College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=REEDLEY" 
+        >
+        Reedley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=RIOHONDO" 
+        >
+        Rio Hondo College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=RCC" 
+        >
+        Riverside City College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SCC" 
+        >
+        Sacramento City College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SADDLBK" 
+        >
+        Saddleback College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SBVC" 
+        >
+        San Bernardino Valley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SDCC" 
+        >
+        San Diego City College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MESA" 
+        >
+        San Diego Mesa College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=MIRAMAR" 
+        >
+        San Diego Miramar College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SDSU" 
+        >
+        San Diego State University</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SFSU" 
+        >
+        San Francisco State University</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SJDELTA" 
+        >
+        San Joaquin Delta College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SJCC" 
+        >
+        San Jose City College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SJSU" 
+        >
+        San Jose State University</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SAC" 
+        >
+        Santa Ana College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SBCC" 
+        >
+        Santa Barbara City College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SMCC" 
+        >
+        Santa Monica College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SRC" 
+        >
+        Santa Rosa Junior College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SANTIAGO" 
+        >
+        Santiago Canyon College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SHASTA" 
+        >
+        Shasta College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SIERRA" 
+        >
+        Sierra College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SKYLINE" 
+        >
+        Skyline College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SOLANO" 
+        >
+        Solano Community College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SSU" 
+        >
+        Sonoma State University</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=SWSTRN" 
+        >
+        Southwestern College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=TAFT" 
+        >
+        Taft College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCDSVM" 
+        >
+        UC Davis School of Veterinary Medicine</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCSFD" 
+        >
+        UCSF School of Dentistry</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCSFP" 
+        >
+        UCSF School of Pharmacy</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCB" 
+        >
+        University of California, Berkeley</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCD" 
+        >
+        University of California, Davis</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCI" 
+        >
+        University of California, Irvine</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCLA" 
+        >
+        University of California, Los Angeles</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCM" 
+        >
+        University of California, Merced</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCR" 
+        >
+        University of California, Riverside</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCSD" 
+        >
+        University of California, San Diego</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCSB" 
+        >
+        University of California, Santa Barbara</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=UCSC" 
+        >
+        University of California, Santa Cruz</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=VENTURA" 
+        >
+        Ventura College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=VVCC" 
+        >
+        Victor Valley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=VISTA" 
+        >
+        Vista Community College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=WHC" 
+        >
+        West Hills College Coalinga</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=WHCL" 
+        >
+        West Hills College Lemoore</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=LAWC" 
+        >
+        West Los Angeles College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=WVC" 
+        >
+        West Valley College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=WCC" 
+        >
+        Woodland Community College</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;oia=CSUC&amp;dir=1&amp;ay=14-15&amp;ia=YUBA" 
+        >
+        Yuba College</option> 
+      
+    </select>
+
+    
+
+       
+      
+      
+        
+      
+    
+
+    &nbsp; 
+
+    <!-- The academic year listbox -->
+    <select name="ay" size="0" tabindex=""
+      onChange="javascript:makewait(document.institution.ay.options[document.institution.ay.selectedIndex].value)"
+      onMouseOver="showHelpDiv('helptextAY')" 
+      onMouseOut="hideHelpDiv('helptextAY')">
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=14-15"
+        
+          SELECTED
+          
+        
+        >14-15</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=13-14"
+        
+        >13-14</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=12-13"
+        
+        >12-13</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=11-12"
+        
+        >11-12</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=10-11"
+        
+        >10-11</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=09-10"
+        
+        >09-10</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=08-09"
+        
+        >08-09</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=07-08"
+        
+        >07-08</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=06-07"
+        
+        >06-07</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=05-06"
+        
+        >05-06</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=04-05"
+        
+        >04-05</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=03-04"
+        
+        >03-04</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=02-03"
+        
+        >02-03</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=01-02"
+        
+        >01-02</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=00-01"
+        
+        >00-01</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=99-00"
+        
+        >99-00</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=98-99"
+        
+        >98-99</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=97-98"
+        
+        >97-98</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=96-97"
+        
+        >96-97</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=95-96"
+        
+        >95-96</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=94-95"
+        
+        >94-95</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=93-94"
+        
+        >93-94</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=92-93"
+        
+        >92-93</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=91-92"
+        
+        >91-92</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=90-91"
+        
+        >90-91</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=89-90"
+        
+        >89-90</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=88-89"
+        
+        >88-89</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=87-88"
+        
+        >87-88</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=86-87"
+        
+        >86-87</option> 
+      
+        <option class="fontsize" 
+          value="articulationAgreement.do?inst1=none&amp;inst2=none&amp;ia=ARC&amp;oia=CSUC&amp;dir=1&amp;ay=85-86"
+        
+        >85-86</option> 
+      
+    </select>
+  </form> 
+
+    
+       
+      
+        
+      
+      
+    
+
+    
+    
+
+    
+
+
+  <h3>Agreements with Other Campuses</h3>
+  <br>
+  <table border="0" class="table1">
+    <tr>
+      <td valign="top">
+        <form name="other_inst">
+          <select id="oia" name="oia" size="0" tabindex="" 
+            onChange="javascript:makewait(document.other_inst.oia.options[document.other_inst.oia.selectedIndex].value)"
+            onMouseOver="showHelpDiv('helptextINST2')" 
+            onMouseOut="hideHelpDiv('helptextINST2')">
+            <option class="fontsize" value="" selected>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+              Click here to select a campus</option>
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUMA&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California Maritime Academy
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CPP&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California Polytechnic University, Pomona
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CPSLO&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California Polytechnic University, San Luis Obispo
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUB&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Bakersfield
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUCI&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Channel Islands
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUC&dir=1"
+
+                  
+                  SELECTED
+
+                  
+                  
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Chico
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUDH&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Dominguez Hills
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUEB&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, East Bay
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUFRES&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Fresno
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUFULL&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Fullerton
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSULB&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Long Beach
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSULA&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Los Angeles
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUMB&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Monterey Bay
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUN&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Northridge
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUS&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Sacramento
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUSB&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, San Bernardino
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUSM&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, San Marcos
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUSTAN&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                California State University, Stanislaus
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=HSU&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                Humboldt State University
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=SDSU&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                San Diego State University
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=SFSU&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                San Francisco State University
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=SJSU&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                San Jose State University
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=SSU&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                Sonoma State University
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCDSVM&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                UC Davis School of Veterinary Medicine
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCSFD&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                UCSF School of Dentistry
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCSFP&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                UCSF School of Pharmacy
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCB&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                University of California, Berkeley
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCD&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                University of California, Davis
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCI&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                University of California, Irvine
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCLA&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                University of California, Los Angeles
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCM&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                University of California, Merced
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCR&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                University of California, Riverside
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCSD&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                University of California, San Diego
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCSB&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                University of California, Santa Barbara
+              </option> 
+            
+              
+                
+                
+                 
+                  
+                
+              
+
+              
+              
+
+              <option class="fontsize" value="articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=UCSC&dir=1"
+
+                
+                
+                >
+                To:&nbsp;
+                
+                University of California, Santa Cruz
+              </option> 
+            
+          </select>
+          
+            
+            
+              <div class="aynote"></div>
+            
+          
+        </form>
+      </td>
+    </tr>
+  </table>
+<div id="cidnote" style="margin-left:30px; color:red">Note: If a current articulation agreement is not available, additional articulation might exist based on C-ID numbers.  Please check the C-ID Search and Reports section below.</div>
+
+  
+   
+    <!-- by major -->
+    
+      
+        <div id="title"> 
+          
+    <p><img src="images/redbullet.gif" alt="*">By Major </p>
+        </div>
+
+        <form name="major" class="form" method="get" action="report.do">
+          <input type="hidden" name="agreement" value="aa">
+          <input type="hidden" name="reportPath" value="REPORT_2">
+          <input type="hidden" name="reportScript" value="Rep2.pl">	
+          <input type="hidden" name="event" value="19">
+                  
+          <input type="hidden" name="dir" value="1">
+          <input type="hidden" name="sia" value="ARC">
+          <input type="hidden" name="ria" value="CSUC">
+          <input type="hidden" name="ia" value="ARC">
+          <input type="hidden" name="oia" value="CSUC">
+          <input type="hidden" name="aay" value="14-15">
+
+          <input type="hidden" name="ay" value="14-15">
+          <select NAME="dora" SIZE="0" tabindex="" class="major"
+            onChange="return formCheckSubmit(this.form, major.dora.value, -1, 'a major')"
+            onMouseOver="showHelpDiv('helptextCHOOSEMAJOR')" onMouseOut="hideHelpDiv('helptextCHOOSEMAJOR')">
+
+            <option SELECTED VALUE="-1"> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Select a major 
+            <option  VALUE="">All Majors </option>
+
+               
+                <option class="fontsize" value="AGBUS"
+                
+                >Agricultural Business B.S.</option> 
+               
+                <option class="fontsize" value="AGAGS"
+                
+                >Agriculture B.S. - Agricultural Science and Education Option</option> 
+               
+                <option class="fontsize" value="AGCS"
+                
+                >Agriculture B.S. - Crops, Horticulture, Land Resource Mgt. Option</option> 
+               
+                <option class="fontsize" value="ASCI"
+                
+                >Animal Science B.S.</option> 
+               
+                <option class="fontsize" value="ANTH"
+                
+                >Anthropology B.A.</option> 
+               
+                <option class="fontsize" value="CSACGP"
+                
+                >Applied Computer Graphics B.S. - Animation Production Option</option> 
+               
+                <option class="fontsize" value="CSACGT"
+                
+                >Applied Computer Graphics B.S. - Game Development Option</option> 
+               
+                <option class="fontsize" value="ARTED"
+                
+                >Art B.A. - Art Education Option</option> 
+               
+                <option class="fontsize" value="ARTH"
+                
+                >Art B.A. - Art History Option</option> 
+               
+                <option class="fontsize" value="ARTS"
+                
+                >Art B.A. - Art Studio Option</option> 
+               
+                <option class="fontsize" value="ARTFAS"
+                
+                >Art B.F.A. - Art Studio Option</option> 
+               
+                <option class="fontsize" value="ARTFAID"
+                
+                >Art B.F.A. - Interior Architecture Option</option> 
+               
+                <option class="fontsize" value="ASIAN"
+                
+                >Asian Studies B.A.</option> 
+               
+                <option class="fontsize" value="BIO CHEM"
+                
+                >Biochemistry B.S.</option> 
+               
+                <option class="fontsize" value="BIO BA"
+                
+                >Biological Sciences B.A.</option> 
+               
+                <option class="fontsize" value="BIO CELL"
+                
+                >Biological Sciences B.S. - Cellular and Molecular Option</option> 
+               
+                <option class="fontsize" value="BIO ECOL"
+                
+                >Biological Sciences B.S. - Ecological, Evolutionary, Organismal Option</option> 
+               
+                <option class="fontsize" value="BIO PLT"
+                
+                >Biological Sciences B.S. - Plant Biology Option</option> 
+               
+                <option class="fontsize" value="BUSA"
+                
+                >Business Administration B.S. - Accounting Option</option> 
+               
+                <option class="fontsize" value="BUSENT"
+                
+                >Business Administration B.S. - Entrepreneurship &amp; Small Business Mgt. Option</option> 
+               
+                <option class="fontsize" value="BUSFM"
+                
+                >Business Administration B.S. - Finance Option</option> 
+               
+                <option class="fontsize" value="BUSBP"
+                
+                >Business Administration B.S. - Human Resource Management Option</option> 
+               
+                <option class="fontsize" value="BUSMAN"
+                
+                >Business Administration B.S. - Management Option</option> 
+               
+                <option class="fontsize" value="BUSMA"
+                
+                >Business Administration B.S. - Marketing Option</option> 
+               
+                <option class="fontsize" value="BUSPROJ"
+                
+                >Business Administration B.S. - Project Management Option</option> 
+               
+                <option class="fontsize" value="BISMIS"
+                
+                >Business Information Systems B.S. - Management Info. Systems Option</option> 
+               
+                <option class="fontsize" value="BISSCMS"
+                
+                >Business Information Systems B.S. - Operations and Supply Chain Mgt. Option</option> 
+               
+                <option class="fontsize" value="CHEM"
+                
+                >Chemistry B.A.</option> 
+               
+                <option class="fontsize" value="CHEMP"
+                
+                >Chemistry B.S.</option> 
+               
+                <option class="fontsize" value="CD"
+                
+                >Child Development B.A.</option> 
+               
+                <option class="fontsize" value="ENGCI"
+                
+                >Civil Engineering B.S.</option> 
+               
+                <option class="fontsize" value="COMVGD"
+                
+                >Communication Design B.A. - Graphic Design Option</option> 
+               
+                <option class="fontsize" value="COMINF"
+                
+                >Communication Design B.A. - Mass Communication Design Option</option> 
+               
+                <option class="fontsize" value="COMMED"
+                
+                >Communication Design B.A. - Media Arts Option</option> 
+               
+                <option class="fontsize" value="SP"
+                
+                >Communication Sciences and Disorders B.A.</option> 
+               
+                <option class="fontsize" value="COMSPE"
+                
+                >Communication Studies B.A. - Communication/Public Affairs Option</option> 
+               
+                <option class="fontsize" value="COMORG"
+                
+                >Communication Studies B.A. - Organizational Communication Option</option> 
+               
+                <option class="fontsize" value="ENGCE"
+                
+                >Computer Engineering B.S.</option> 
+               
+                <option class="fontsize" value="CSCIC"
+                
+                >Computer Information Systems B.S.</option> 
+               
+                <option class="fontsize" value="CSCIG"
+                
+                >Computer Science B.S.</option> 
+               
+                <option class="fontsize" value="CON MGT"
+                
+                >Concrete Industry Management B.S.</option> 
+               
+                <option class="fontsize" value="CM"
+                
+                >Construction Management B.S.</option> 
+               
+                <option class="fontsize" value="PSCJ"
+                
+                >Criminal Justice B.A.</option> 
+               
+                <option class="fontsize" value="ECON"
+                
+                >Economics B.A.</option> 
+               
+                <option class="fontsize" value="ENGEE"
+                
+                >Electrical/Electronic Engineering B.S.</option> 
+               
+                <option class="fontsize" value="ENGLEE"
+                
+                >English B.A. - English Education Option</option> 
+               
+                <option class="fontsize" value="ENGL"
+                
+                >English B.A. - English Studies Option</option> 
+               
+                <option class="fontsize" value="ENG LIT"
+                
+                >English B.A. - Literature Option</option> 
+               
+                <option class="fontsize" value="GEOESA"
+                
+                >Environmental Science B.S. - Applied Ecology Option</option> 
+               
+                <option class="fontsize" value="ENVSCIAT"
+                
+                >Environmental Science B.S. - Atmosphere and Climate Option</option> 
+               
+                <option class="fontsize" value="GEOESES"
+                
+                >Environmental Science B.S. - Energy and Earth Resources Option</option> 
+               
+                <option class="fontsize" value="GEOESWS"
+                
+                >Environmental Science B.S. - Hydrology Option</option> 
+               
+                <option class="fontsize" value="PEEX"
+                
+                >Exercise Physiology B.S.</option> 
+               
+                <option class="fontsize" value="FORFREN"
+                
+                >French B.A.</option> 
+               
+                <option class="fontsize" value="GEOGG"
+                
+                >Geography B.A. - Human Geography and Planning Option</option> 
+               
+                <option class="fontsize" value="GEOGI"
+                
+                >Geography B.A. - Physical and Environmental Option</option> 
+               
+                <option class="fontsize" value="GEOGEOL"
+                
+                >Geology B.S.</option> 
+               
+                <option class="fontsize" value="GEOHYD"
+                
+                >Geosciences B.S. - Physical Science Education Option</option> 
+               
+                <option class="fontsize" value="GEOSE"
+                
+                >Geosciences B.S. - Science Education Option</option> 
+               
+                <option class="fontsize" value="FORGRMN"
+                
+                >German B.A.</option> 
+               
+                <option class="fontsize" value="HSAH"
+                
+                >Health Science B.S. - Health Education Option</option> 
+               
+                <option class="fontsize" value="HSHC"
+                
+                >Health Science B.S. - Health Services Administration Option</option> 
+               
+                <option class="fontsize" value="HIST"
+                
+                >History B.A. - General Option</option> 
+               
+                <option class="fontsize" value="HISTSS"
+                
+                >History B.A. - Social Science Pre-credential Option</option> 
+               
+                <option class="fontsize" value="HUMG"
+                
+                >Humanities B.A.</option> 
+               
+                <option class="fontsize" value="PSIR"
+                
+                >International Relations B.A.</option> 
+               
+                <option class="fontsize" value="COMJNE"
+                
+                >Journalism B.A. - News Option</option> 
+               
+                <option class="fontsize" value="COMJPR"
+                
+                >Journalism B.A. - Public Relations Option</option> 
+               
+                <option class="fontsize" value="PEG"
+                
+                >Kinesiology B.A. - Movement Studies Option</option> 
+               
+                <option class="fontsize" value="KINE OED"
+                
+                >Kinesiology B.A. - Outdoor Education Option</option> 
+               
+                <option class="fontsize" value="PET"
+                
+                >Kinesiology B.A. - Physical Education Teacher Education Option</option> 
+               
+                <option class="fontsize" value="LA"
+                
+                >Latin American Studies B.A.</option> 
+               
+                <option class="fontsize" value="LSC"
+                
+                >Liberal Studies and Child Development B.A.</option> 
+               
+                <option class="fontsize" value="LSB"
+                
+                >Liberal Studies B.A. - Bilingual/Cross-Cultural Option</option> 
+               
+                <option class="fontsize" value="LSG"
+                
+                >Liberal Studies B.A. - General (Pre-credential) Option</option> 
+               
+                <option class="fontsize" value="ENGLING"
+                
+                >Linguistics B.A.</option> 
+               
+                <option class="fontsize" value="MATHA"
+                
+                >Mathematics B.S. - Applied Mathematics Option</option> 
+               
+                <option class="fontsize" value="MATHG"
+                
+                >Mathematics B.S. - General Option</option> 
+               
+                <option class="fontsize" value="MATHC"
+                
+                >Mathematics B.S. - Mathematics Education Option</option> 
+               
+                <option class="fontsize" value="MATHS"
+                
+                >Mathematics B.S. - Statistics Option</option> 
+               
+                <option class="fontsize" value="ENGME"
+                
+                >Mechanical Engineering B.S.</option> 
+               
+                <option class="fontsize" value="ENGMT"
+                
+                >Mechatronic Engineering B.S.</option> 
+               
+                <option class="fontsize" value="MICROM"
+                
+                >Microbiology B.S. - Clinical Laboratory Science Option</option> 
+               
+                <option class="fontsize" value="MICROG"
+                
+                >Microbiology B.S. - General Microbiology Option</option> 
+               
+                <option class="fontsize" value="ETHST"
+                
+                >Multicultural and Gender Studies B.A. - General Option</option> 
+               
+                <option class="fontsize" value="ETHSTW"
+                
+                >Multicultural and Gender Studies B.A. - Women&#039;s Studies Option</option> 
+               
+                <option class="fontsize" value="MUSG"
+                
+                >Music B.A. - General Option</option> 
+               
+                <option class="fontsize" value="MUSM"
+                
+                >Music B.A. - Music Education Option</option> 
+               
+                <option class="fontsize" value="MUSMI"
+                
+                >Music B.A. - Music Industry Option</option> 
+               
+                <option class="fontsize" value="MUSR"
+                
+                >Music B.A. - Recording Arts Option</option> 
+               
+                <option class="fontsize" value="THARM"
+                
+                >Musical Theatre B.A.</option> 
+               
+                <option class="fontsize" value="NS CHEM"
+                
+                >Natural Sciences B.A. - Chemistry Option</option> 
+               
+                <option class="fontsize" value="NS ENVSCI"
+                
+                >Natural Sciences B.A. - Environmental Science Option</option> 
+               
+                <option class="fontsize" value="NS BIOL"
+                
+                >Natural Sciences B.A. - General Biology Option</option> 
+               
+                <option class="fontsize" value="NS GEOL"
+                
+                >Natural Sciences B.A. - Geology Option</option> 
+               
+                <option class="fontsize" value="NS HUM"
+                
+                >Natural Sciences B.A. - Human Biology Option</option> 
+               
+                <option class="fontsize" value="NS PHSC"
+                
+                >Natural Sciences B.A. - Physical Science Option</option> 
+               
+                <option class="fontsize" value="NURS"
+                
+                >Nursing B.S.</option> 
+               
+                <option class="fontsize" value="NUTRCOMM"
+                
+                >Nutrition and Food Sciences B.S. - Food &amp; Nutrition Communication Option</option> 
+               
+                <option class="fontsize" value="NUTRGD"
+                
+                >Nutrition and Food Sciences B.S. - General Dietetics Option</option> 
+               
+                <option class="fontsize" value="NUTRFA"
+                
+                >Nutrition and Food Services B.S. - Nutrition Management Option</option> 
+               
+                <option class="fontsize" value="PHIL"
+                
+                >Philosophy B.A.</option> 
+               
+                <option class="fontsize" value="PHYSSE"
+                
+                >Physics B.S. - General Option</option> 
+               
+                <option class="fontsize" value="PHYSAS"
+                
+                >Physics B.S. - Professional Physics Option</option> 
+               
+                <option class="fontsize" value="PS"
+                
+                >Political Science B.A. - General Option</option> 
+               
+                <option class="fontsize" value="PSLSAD"
+                
+                >Political Science B.A. - Legal Studies Option</option> 
+               
+                <option class="fontsize" value="PSY"
+                
+                >Psychology B.A.</option> 
+               
+                <option class="fontsize" value="PSPA"
+                
+                >Public Administration B.A.</option> 
+               
+                <option class="fontsize" value="RECC"
+                
+                >Recreation Administration B.S. - Community/Commercial Recreation &amp; Tourism  Opti</option> 
+               
+                <option class="fontsize" value="RECTOUR"
+                
+                >Recreation Administration B.S. - Event Management Option</option> 
+               
+                <option class="fontsize" value="RECP"
+                
+                >Recreation Administration B.S. - Parks &amp; Natural Resources Management Option</option> 
+               
+                <option class="fontsize" value="RECS"
+                
+                >Recreation Administration B.S. - Recreation Therapy Option</option> 
+               
+                <option class="fontsize" value="RECRLL"
+                
+                >Recreation Administration B.S. - Resort &amp; Lodging Management Option</option> 
+               
+                <option class="fontsize" value="RS"
+                
+                >Religious Studies B.A.</option> 
+               
+                <option class="fontsize" value="SSB"
+                
+                >Social Science B.A. - Multidisciplinary Studies Option</option> 
+               
+                <option class="fontsize" value="SSD"
+                
+                >Social Science B.A. - Specialization Studies Option</option> 
+               
+                <option class="fontsize" value="SW"
+                
+                >Social Work B.A.</option> 
+               
+                <option class="fontsize" value="SOCI"
+                
+                >Sociology B.A.</option> 
+               
+                <option class="fontsize" value="FORSPAN"
+                
+                >Spanish B.A.</option> 
+               
+                <option class="fontsize" value="ITMMI"
+                
+                >Sustainable Manufacturing B.S.</option> 
+               
+                <option class="fontsize" value="THARG"
+                
+                >Theatre Arts B.A.</option> 
+              
+          </select>
+        </form>
+              
+      
+    
+
+        
+    <!-- by department  -->
+    
+      
+
+        <div id="title"> 
+          
+    <p><img src="images/redbullet.gif" alt="*">By Department at:</p>
+        </div>
+        <table class="table1" cellpadding="0">
+        <tr> 
+          <td>
+            <div id="instdepthead">
+              California State University, Chico 
+            </div>
+          </td>
+          <td>
+            <div id="instdepthead"> 
+              OR
+            </div>
+          </td>   
+          <td align="left">
+            <div id="instdepthead"> 
+              American River College
+            </div>
+          </td>
+        </tr>
+
+        <tr> 
+          <td colspan="2">
+            
+               
+                
+                
+                  
+                  
+                    
+                  
+                
+
+                <form name="recvDept" method="get" action="report.do">
+                  <input type="hidden" name="agreement" value="aa">
+                  <input type="hidden" name="reportPath" value="REPORT_2">
+                  <input type="hidden" name="reportScript" value="Rep2.pl">
+                  <input type="hidden" name="event" value="18">
+                  <input type="hidden" name="swap" value="1"> 
+                          
+                  <input type="hidden" name="dir" value="1">
+                  <input type="hidden" name="sia" value="ARC">
+                  <input type="hidden" name="ria" value="CSUC">
+                  <input type="hidden" name="ia" value="ARC">
+                  <input type="hidden" name="oia" value="CSUC">
+                  <input type="hidden" name="aay" value="14-15">
+                  <input type="hidden" name="ay" value="14-15">
+                  <select NAME="dora" SIZE="0" tabindex="" class="recvDept"
+                    onChange="return formCheckSubmit(this.form, recvDept.dora.value, -1, 'a receiving department')"
+                    onMouseOver="showHelpDiv('helptextDEPT_REC_INST')" onMouseOut="hideHelpDiv('helptextDEPT_REC_INST')">
+
+                    <option SELECTED VALUE="-1"> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Select a department
+                    <option  VALUE="">All Departments </option>
+                     
+                      <option class="fontsize" value="AGRI"
+                        
+                        >Agriculture
+                      </option> 
+                     
+                      <option class="fontsize" value="ANTH"
+                        
+                        >Anthropology
+                      </option> 
+                     
+                      <option class="fontsize" value="APCG"
+                        
+                        >Applied Computer Graphics
+                      </option> 
+                     
+                      <option class="fontsize" value="ART"
+                        
+                        >Art
+                      </option> 
+                     
+                      <option class="fontsize" value="BIOL"
+                        
+                        >Biological Sciences
+                      </option> 
+                     
+                      <option class="fontsize" value="BUS"
+                        
+                        >Business
+                      </option> 
+                     
+                      <option class="fontsize" value="CHEMBIO"
+                        
+                        >Chemistry and Biochemistry
+                      </option> 
+                     
+                      <option class="fontsize" value="C D"
+                        
+                        >Child Development
+                      </option> 
+                     
+                      <option class="fontsize" value="COM"
+                        
+                        >Communication
+                      </option> 
+                     
+                      <option class="fontsize" value="COMMSCI"
+                        
+                        >Communication Sciences and Disorders
+                      </option> 
+                     
+                      <option class="fontsize" value="CORH"
+                        
+                        >Comparative Religion and Humanities
+                      </option> 
+                     
+                      <option class="fontsize" value="CSCI"
+                        
+                        >Computer Science
+                      </option> 
+                     
+                      <option class="fontsize" value="CIMT"
+                        
+                        >Concrete Industry Management
+                      </option> 
+                     
+                      <option class="fontsize" value="CM"
+                        
+                        >Construction Management
+                      </option> 
+                     
+                      <option class="fontsize" value="ECON"
+                        
+                        >Economics
+                      </option> 
+                     
+                      <option class="fontsize" value="EDUC"
+                        
+                        >Education
+                      </option> 
+                     
+                      <option class="fontsize" value="ENGR"
+                        
+                        >Engineering
+                      </option> 
+                     
+                      <option class="fontsize" value="ENGL"
+                        
+                        >English
+                      </option> 
+                     
+                      <option class="fontsize" value="GEOG"
+                        
+                        >Geography and Planning
+                      </option> 
+                     
+                      <option class="fontsize" value="GEOSCI"
+                        
+                        >Geological and Environmental Sciences
+                      </option> 
+                     
+                      <option class="fontsize" value="HLTH SCI"
+                        
+                        >Health Sciences
+                      </option> 
+                     
+                      <option class="fontsize" value="HIST"
+                        
+                        >History
+                      </option> 
+                     
+                      <option class="fontsize" value="INTST"
+                        
+                        >Interdisciplinary Programs
+                      </option> 
+                     
+                      <option class="fontsize" value="INT STUD"
+                        
+                        >International Languages, Literatures, and Cultures
+                      </option> 
+                     
+                      <option class="fontsize" value="KINES"
+                        
+                        >Kinesiology and Exercise Physiology
+                      </option> 
+                     
+                      <option class="fontsize" value="MATH"
+                        
+                        >Mathematics
+                      </option> 
+                     
+                      <option class="fontsize" value="MCGS"
+                        
+                        >Multicultural &amp; Gender Studies
+                      </option> 
+                     
+                      <option class="fontsize" value="MUS THEA"
+                        
+                        >Music and Theatre
+                      </option> 
+                     
+                      <option class="fontsize" value="NURS"
+                        
+                        >Nursing
+                      </option> 
+                     
+                      <option class="fontsize" value="NFSC"
+                        
+                        >Nutrition &amp; Food Sciences
+                      </option> 
+                     
+                      <option class="fontsize" value="PHIL"
+                        
+                        >Philosophy
+                      </option> 
+                     
+                      <option class="fontsize" value="PHYS"
+                        
+                        >Physics
+                      </option> 
+                     
+                      <option class="fontsize" value="POLS"
+                        
+                        >Political Science
+                      </option> 
+                     
+                      <option class="fontsize" value="PSY"
+                        
+                        >Psychology
+                      </option> 
+                     
+                      <option class="fontsize" value="RECR"
+                        
+                        >Recreation, Hospitality, and Parks Management
+                      </option> 
+                     
+                      <option class="fontsize" value="SCED"
+                        
+                        >Science Education
+                      </option> 
+                     
+                      <option class="fontsize" value="SOSC"
+                        
+                        >Social Science
+                      </option> 
+                     
+                      <option class="fontsize" value="SWRK"
+                        
+                        >Social Work
+                      </option> 
+                     
+                      <option class="fontsize" value="SOCI"
+                        
+                        >Sociology
+                      </option> 
+                     
+                      <option class="fontsize" value="SUSTMAN"
+                        
+                        >Sustainable Manufacturing
+                      </option> 
+                    
+                  </select>
+                </form>
+              
+              
+            
+          </td>
+
+          <td> 
+            
+               
+                
+                  
+                  
+                    
+                  
+                
+                <form name="sendDept" method="get" action="report.do">
+                  <input type="hidden" name="agreement" value="aa">
+                  <input type="hidden" name="reportPath" value="REPORT_2">
+                  <input type="hidden" name="reportScript" value="Rep2.pl">	                  <input type="hidden" name="event" value="18">
+                  <input type="hidden" name="swap" value="0">	
+                          
+                  <input type="hidden" name="dir" value="1">
+                  <input type="hidden" name="sia" value="ARC">
+                  <input type="hidden" name="ria" value="CSUC">
+                  <input type="hidden" name="ia" value="ARC">
+                  <input type="hidden" name="oia" value="CSUC">
+                  <input type="hidden" name="aay" value="14-15">
+                  <input type="hidden" name="ay" value="14-15">
+                  <select NAME="dora" SIZE="0" tabindex="" class="sendDept"
+                    onChange="return formCheckSubmit(this.form, sendDept.dora.value, -1, 'a sending department')"
+                    onMouseOver="showHelpDiv('helptextDEPT_SEND_INST')" onMouseOut="hideHelpDiv('helptextDEPT_SEND_INST')">
+
+
+                    <option SELECTED VALUE="-1"> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Select a department
+                    <option  VALUE="">All Departments </option>
+                     
+                      <option class="fontsize" value="ACCT"
+                        
+                        >Accounting
+                      </option> 
+                     
+                      <option class="fontsize" value="ADAPT"
+                        
+                        >Adaptive
+                      </option> 
+                     
+                      <option class="fontsize" value="ADMJ"
+                        
+                        >Administration of Justice
+                      </option> 
+                     
+                      <option class="fontsize" value="ANTH"
+                        
+                        >Anthropology
+                      </option> 
+                     
+                      <option class="fontsize" value="ART"
+                        
+                        >Art
+                      </option> 
+                     
+                      <option class="fontsize" value="ARTNM"
+                        
+                        >Art - New Media
+                      </option> 
+                     
+                      <option class="fontsize" value="ARTH"
+                        
+                        >Art History
+                      </option> 
+                     
+                      <option class="fontsize" value="ARTPH"
+                        
+                        >Art Photography
+                      </option> 
+                     
+                      <option class="fontsize" value="ASTR"
+                        
+                        >Astronomy
+                      </option> 
+                     
+                      <option class="fontsize" value="BIOL"
+                        
+                        >Biology
+                      </option> 
+                     
+                      <option class="fontsize" value="BUS"
+                        
+                        >Business
+                      </option> 
+                     
+                      <option class="fontsize" value="CHEM"
+                        
+                        >Chemistry
+                      </option> 
+                     
+                      <option class="fontsize" value="CISA"
+                        
+                        >Computer Information Science - Applications
+                      </option> 
+                     
+                      <option class="fontsize" value="CISC"
+                        
+                        >Computer Information Science - Core
+                      </option> 
+                     
+                      <option class="fontsize" value="CISP"
+                        
+                        >Computer Information Science - Programming
+                      </option> 
+                     
+                      <option class="fontsize" value="CISW"
+                        
+                        >Computer Information Science - Web
+                      </option> 
+                     
+                      <option class="fontsize" value="DANCE"
+                        
+                        >Dance
+                      </option> 
+                     
+                      <option class="fontsize" value="E C E"
+                        
+                        >Early Childhood Education
+                      </option> 
+                     
+                      <option class="fontsize" value="ECON"
+                        
+                        >Economics
+                      </option> 
+                     
+                      <option class="fontsize" value="ELECT"
+                        
+                        >Electronics Technology
+                      </option> 
+                     
+                      <option class="fontsize" value="ENGR"
+                        
+                        >Engineering
+                      </option> 
+                     
+                      <option class="fontsize" value="ENGCW"
+                        
+                        >English - Creative Writing
+                      </option> 
+                     
+                      <option class="fontsize" value="ENGED"
+                        
+                        >English - Education
+                      </option> 
+                     
+                      <option class="fontsize" value="ENGLT"
+                        
+                        >English - Literature
+                      </option> 
+                     
+                      <option class="fontsize" value="ENGWR"
+                        
+                        >English - Writing
+                      </option> 
+                     
+                      <option class="fontsize" value="FITNS"
+                        
+                        >Fitness
+                      </option> 
+                     
+                      <option class="fontsize" value="FREN"
+                        
+                        >French
+                      </option> 
+                     
+                      <option class="fontsize" value="GEOG"
+                        
+                        >Geography
+                      </option> 
+                     
+                      <option class="fontsize" value="GEOL"
+                        
+                        >Geology
+                      </option> 
+                     
+                      <option class="fontsize" value="GERM"
+                        
+                        >German
+                      </option> 
+                     
+                      <option class="fontsize" value="HE ED"
+                        
+                        >Health Education
+                      </option> 
+                     
+                      <option class="fontsize" value="HIST"
+                        
+                        >History
+                      </option> 
+                     
+                      <option class="fontsize" value="HORT"
+                        
+                        >Horticulture
+                      </option> 
+                     
+                      <option class="fontsize" value="H M"
+                        
+                        >Hospitality Management
+                      </option> 
+                     
+                      <option class="fontsize" value="H SER"
+                        
+                        >Human Services
+                      </option> 
+                     
+                      <option class="fontsize" value="HUM"
+                        
+                        >Humanities
+                      </option> 
+                     
+                      <option class="fontsize" value="I DES"
+                        
+                        >Interior Design
+                      </option> 
+                     
+                      <option class="fontsize" value="ITAL"
+                        
+                        >Italian
+                      </option> 
+                     
+                      <option class="fontsize" value="JOUR"
+                        
+                        >Journalism
+                      </option> 
+                     
+                      <option class="fontsize" value="MATH"
+                        
+                        >Mathematics
+                      </option> 
+                     
+                      <option class="fontsize" value="MUFHL"
+                        
+                        >Music Fundamentals History and Literature
+                      </option> 
+                     
+                      <option class="fontsize" value="MUIVI"
+                        
+                        >Music Instrument - Voice Instruction
+                      </option> 
+                     
+                      <option class="fontsize" value="NUTRI"
+                        
+                        >Nutrition and Foods
+                      </option> 
+                     
+                      <option class="fontsize" value="PACT"
+                        
+                        >Personal Activity
+                      </option> 
+                     
+                      <option class="fontsize" value="PHIL"
+                        
+                        >Philosophy
+                      </option> 
+                     
+                      <option class="fontsize" value="P S"
+                        
+                        >Physical Science
+                      </option> 
+                     
+                      <option class="fontsize" value="PHYS"
+                        
+                        >Physics
+                      </option> 
+                     
+                      <option class="fontsize" value="POL S"
+                        
+                        >Political Science
+                      </option> 
+                     
+                      <option class="fontsize" value="PSYC"
+                        
+                        >Psychology
+                      </option> 
+                     
+                      <option class="fontsize" value="RECR"
+                        
+                        >Recreation
+                      </option> 
+                     
+                      <option class="fontsize" value="SI LA"
+                        
+                        >Sign Language
+                      </option> 
+                     
+                      <option class="fontsize" value="SOC"
+                        
+                        >Sociology
+                      </option> 
+                     
+                      <option class="fontsize" value="SPAN"
+                        
+                        >Spanish
+                      </option> 
+                     
+                      <option class="fontsize" value="SPEE"
+                        
+                        >Speech
+                      </option> 
+                     
+                      <option class="fontsize" value="SLPA"
+                        
+                        >Speech-Language Pathology
+                      </option> 
+                     
+                      <option class="fontsize" value="STAT"
+                        
+                        >Statistics
+                      </option> 
+                     
+                      <option class="fontsize" value="TMACT"
+                        
+                        >Team Activity
+                      </option> 
+                     
+                      <option class="fontsize" value="T A"
+                        
+                        >Theatre Arts
+                      </option> 
+                    
+                  </select>
+                </form>
+              
+              
+            
+          </td>
+        </tr>
+      </table>
+      
+      
+    
+
+    <!-- GE breadth.  -->
+       
+       
+        <div id="title">
+  <p><img src="images/redbullet.gif" alt="*">For General Education/Breadth </p>
+        </div>
+
+        <form name="gebreadth" class="form" method="get" action="report.do">
+          <input type="hidden" name="agreement" value="aa">
+          <input type="hidden" name="reportPath" value="REPORT_2">
+          <input type="hidden" name="reportScript" value="Rep2.pl">
+          <input type="hidden" name="event" value="21">
+          
+          <input type="hidden" name="dir" value="1">
+          <input type="hidden" name="sia" value="ARC">
+          <input type="hidden" name="ria" value="CSUC">
+          <input type="hidden" name="ia" value="ARC">
+          <input type="hidden" name="oia" value="CSUC">
+          <input type="hidden" name="aay" value="14-15">
+          <input type="hidden" name="ay" value="14-15">
+
+          <select NAME="dora" SIZE="0" tabindex="" class="major"
+            onChange="return formCheckSubmit(this.form, gebreadth.dora.value, -1, 'a major')"
+            onMouseOver="showHelpDiv('helptextFOR_GE')" onMouseOut="hideHelpDiv('helptextFOR_GE')">
+            <option SELECTED VALUE="-1"> &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;Select a GE/Breadth Agreement
+
+              
+                <option class="fontsize" value="GE DIV"
+                
+                >General Education Pathway Minor in Diversity Studies</option>
+              
+                <option class="fontsize" value="GE ETH"
+                
+                >General Education Pathway Minor in Ethics, Justice and Policy Studies</option>
+              
+                <option class="fontsize" value="GE FOOD"
+                
+                >General Education Pathway Minor in Food Studies</option>
+              
+                <option class="fontsize" value="GE GEND"
+                
+                >General Education Pathway Minor in Gender and Sexuality Studies</option>
+              
+                <option class="fontsize" value="GE GLBL"
+                
+                >General Education Pathway Minor in Global Development Studies</option>
+              
+                <option class="fontsize" value="GE BOOK"
+                
+                >General Education Pathway Minor in Great Books and Ideas</option>
+              
+                <option class="fontsize" value="GE HLTH"
+                
+                >General Education Pathway Minor in Health and Wellness Studies</option>
+              
+                <option class="fontsize" value="GE INTL"
+                
+                >General Education Pathway Minor in International Studies</option>
+              
+                <option class="fontsize" value="GE SCI"
+                
+                >General Education Pathway Minor in Science, Technology and Values</option>
+              
+                <option class="fontsize" value="GE SUST"
+                
+                >General Education Pathway Minor in Sustainability Studies</option>
+              
+                <option class="fontsize" value="ETHN NONW"
+                
+                >U.S. Diversity/Global Cultures Requirement</option>
+              
+          </select>
+        </form>
+      
+      
+    
+ 
+  
+  
+  
+  
+      <!-- LDTP Report start-->
+
+ 
+ 	
+    
+    <!-- LDTP Report end-->
+ <!-- end of if not empty for agreement -->
+
+  
+
+  <!-- decide if we output TCA info & what the headings should read
+
+       1. If a college has been selected as either the IA or
+          OIA, then output the TCA links.
+       2. If the user has selected a university, with no other 
+          institution, then no links are displayed.
+  -->      
+     
+    
+      
+      
+    
+    
+  
+
+  
+
+  <p>&nbsp;</p>   
+  <h3>American River College Courses Applicable for Transfer </h3>
+
+  <p></p>
+  <p></p>
+
+  <!-- CSU bacc flag -->
+  <!-- true -->
+     
+     
+      
+  <p><img src="images/redbullet.gif" alt="*"> <a href="tcaAgreement.do?inst1=none&inst2=none&type=csuBacc&ia=ARC&ay=14-15" 
+        onMouseOver="showHelpDiv('helptext1')" 
+        onMouseOut="hideHelpDiv('helptext1')">CSU Transferable Courses</a></p>
+    
+    
+  
+
+  
+  
+
+  <!-- CSU GE flag -->      
+     
+     
+      
+  <p><img src="images/redbullet.gif" alt="*"> <a href="tcaAgreement.do?inst2=none&inst1=none&type=csuGe&ia=ARC&ay=14-15" 
+          onMouseOver="showHelpDiv('helptext2')" 
+          onMouseOut="hideHelpDiv('helptext2')">CSU GE-Breadth Certification Courses</a> 
+  </p>
+    
+    
+  
+
+  
+  
+  <!-- end of CSU GE- breadth block -->
+
+  <!-- American Institution flag -->
+     
+     
+
+    <p>      
+    <img src="images/redbullet.gif" alt="*"> <a href=tcaAgreementWithReport.do?type=amerInst&agreement=tca&reportPath=REPORT_2&reportScript=Rep2.pl&ay=14-15&ia=ARC&event=30&aay=
+          onMouseOver="showHelpDiv('helptext3')" 
+          onMouseOut="hideHelpDiv('helptext3')">CSU US History, Constitution, 
+    and American Ideals Courses</a> </p>
+    
+    
+  
+
+        
+
+  <!-- IGETC flag -->
+     
+    
+      
+  <p><img src="images/redbullet.gif" alt="*"> <a href="tcaAgreement.do?inst2=none&inst1=none&type=igetc&ia=ARC&ay=14-15" 
+          onMouseOver="showHelpDiv('helptext6')"
+          onMouseOut="hideHelpDiv('helptext6')">IGETC for UC and CSU </a> </p>
+    
+    
+  
+
+  
+
+  
+ 
+  <!-- end of IGETC -->
+
+  <!-- UC TCA flag -->
+     
+     
+      
+  <p><img src="images/redbullet.gif" alt="*"> <a href="tcaAgreement.do?inst2=none&inst1=none&type=ucop&ia=ARC&ay=14-15" 
+          onMouseOver="showHelpDiv('helptext7')" 
+          onMouseOut="hideHelpDiv('helptext7')">UC Transferable Courses</a> </p>
+    
+    
+  
+
+  
+  
+
+  <!-- end of UC Transferable Courses -->
+
+  <!-- start of UC Eligibility flag -->
+     
+    
+      
+  <p><img src="images/redbullet.gif" alt="*"> <a href="tcaAgreement.do?inst2=none&inst1=none&type=ucElig&ia=ARC&ay=14-15" 
+          onMouseOver="showHelpDiv('helptext8')"
+          onMouseOut="hideHelpDiv('helptext8')">UC Transfer Admission Eligibility 
+    Courses</a> </p>
+    
+    
+  
+
+  
+  
+
+  <p>&nbsp;</p>   
+  <h3>C-ID Search and Reports</h3>
+  
+  <div style="margin-left:20px">
+    <p><b>Click links below to search by department</b></p>
+  </div>
+  <!-- ####  C-ID institution 1 link ####  -->
+   
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+
+     
+    
+      <!-- if the inst has C-ID courses, show the link -->
+      <p id="dept1link"><img src="images/redbullet.gif" alt="*"> <a href="articulationAgreement.do?inst1=ARC&inst2=none&ia=ARC&ay=14-15&oia=CSUC&aay=&dir=1" 
+          onMouseOver="showHelpDiv('helptextCid')"
+          onMouseOut="hideHelpDiv('helptextCid')">
+      C-ID Designators at American River College </a> </p>
+
+      <!-- if user has clicked the link, there will be cids in cid1 -->
+      
+        
+        
+      
+    
+    
+  
+
+  <!-- ##### C-ID institution 2 link ##### -->
+  <!-- Only show the link if a 2nd institution has been selected -->
+  
+       
+      
+      <p id="dept2link"><img src="images/redbullet.gif" alt="*"> <a href="articulationAgreement.do?inst1=none&inst2=CSUC&ia=ARC&ay=14-15&oia=CSUC&aay=&dir=1" 
+           onMouseOver="showHelpDiv('helptextCid')"
+           onMouseOut="hideHelpDiv('helptextCid')">
+         C-ID Designators at California State University, Chico </a> </p>
+         <!-- if user has clicked the link, there will be cids in cidDeptList2 -->
+	 
+           
+           
+	 
+
+      
+      
+    
+  
+
+  <p>
+  <div style="margin-left:20px">
+    <p><b>Choose a campus and click dropdowns below to search by discipline</b></p>
+    <form style="margin-left:40px;" name="cidsearch">
+    <div id="discrad1">
+    <input onChange="return updateCidSchool()"
+        onMouseOver="showHelpDiv('helptextCidDiscipline')" onMouseOut="hideHelpDiv('helptextCidDiscipline')"
+      type="radio" name="cidgroup" checked="checked" value="American River College">Search American River College</div>
+    
+       <div id="discrad2">
+       <input id="discrad1" onChange="return updateCidSchool()"
+        onMouseOver="showHelpDiv('helptextCidDiscipline')" onMouseOut="hideHelpDiv('helptextCidDiscipline')"
+       type="radio" name="cidgroup" value="California State University, Chico">Search California State University, Chico</div>
+    
+    <input onChange="return updateCidSchool()"
+        onMouseOver="showHelpDiv('helptextCidDiscipline')" onMouseOut="hideHelpDiv('helptextCidDiscipline')"
+     type="radio" name="cidgroup" value="all">Search All Campuses<br>
+    <br>
+    <select id="cid_discipline" name="cid_discipline"
+        onChange="updateSubDiscipline(academicYear, currentSchoolAbbrev)"
+        onMouseOver="showHelpDiv('helptextCidDiscipline')" 
+        onMouseOut="hideHelpDiv('helptextCidDiscipline')">
+       <option class="fontsize" value="0">
+       Select a C-ID Discipline
+       </option>
+    
+      <option class="fontsize" value="1">
+         Accounting
+      </option> 
+    
+      <option class="fontsize" value="2">
+         Administration of Justice
+      </option> 
+    
+      <option class="fontsize" value="4">
+         Anthropology
+      </option> 
+    
+      <option class="fontsize" value="5">
+         Art History
+      </option> 
+    
+      <option class="fontsize" value="6">
+         Biology
+      </option> 
+    
+      <option class="fontsize" value="8">
+         Business
+      </option> 
+    
+      <option class="fontsize" value="9">
+         Chemistry
+      </option> 
+    
+      <option class="fontsize" value="11">
+         Child Development
+      </option> 
+    
+      <option class="fontsize" value="12">
+         Communication Studies
+      </option> 
+    
+      <option class="fontsize" value="13">
+         Computer Science
+      </option> 
+    
+      <option class="fontsize" value="14">
+         Early Childhood Education
+      </option> 
+    
+      <option class="fontsize" value="15">
+         Economics
+      </option> 
+    
+      <option class="fontsize" value="16">
+         Education
+      </option> 
+    
+      <option class="fontsize" value="18">
+         English
+      </option> 
+    
+      <option class="fontsize" value="20">
+         Geography
+      </option> 
+    
+      <option class="fontsize" value="21">
+         Geology
+      </option> 
+    
+      <option class="fontsize" value="24">
+         History
+      </option> 
+    
+      <option class="fontsize" value="26">
+         Information Technology and Information Systems
+      </option> 
+    
+      <option class="fontsize" value="27">
+         Journalism
+      </option> 
+    
+      <option class="fontsize" value="29">
+         Mathematics
+      </option> 
+    
+      <option class="fontsize" value="30">
+         Music
+      </option> 
+    
+      <option class="fontsize" value="33">
+         Philosophy
+      </option> 
+    
+      <option class="fontsize" value="35">
+         Physics
+      </option> 
+    
+      <option class="fontsize" value="36">
+         Political Science
+      </option> 
+    
+      <option class="fontsize" value="37">
+         Psychology
+      </option> 
+    
+      <option class="fontsize" value="40">
+         Sociology
+      </option> 
+    
+      <option class="fontsize" value="41">
+         Spanish
+      </option> 
+    
+      <option class="fontsize" value="42">
+         Studio Arts
+      </option> 
+    
+      <option class="fontsize" value="43">
+         Theatre
+      </option> 
+    
+    </select>
+    &nbsp;&nbsp;&nbsp;
+    <select disabled="true" id="cid_subdiscipline" name="cid_subdiscipline"
+        onChange="return chooseSubDiscipline(currentSchoolAbbrev, academicYear)"
+        onMouseOver="showHelpDiv('helptextCidDiscipline')" 
+        onMouseOut="hideHelpDiv('helptextCidDiscipline')">
+       <option class="fontsize" value="0">
+       Select a C-ID Sub-Discipline
+       </option>
+    </select>
+    </form>
+  </div>
+<br><br><br>
+
+<!-- final div -->
+</div>
+
+<script type="text/javascript">
+  function updateCidSchool() {
+    var discipline = document.getElementById("cid_discipline");
+    var subdrop = document.getElementById("cid_subdiscipline");
+    discipline.options.length = 0;
+    var checked = 0;
+    var cidgroup = document.getElementsByName("cidgroup");
+    for (x = 1; x < cidgroup.length; x++)
+      if (cidgroup[x].checked)
+	checked = x;
+
+    discipline.options[0] = new Option("Select a C-ID Discipline", 0);
+    // school 1
+    if (checked == 0) {
+      //alert ("doing school 1");
+      for (i = 0; i < disciplines1.length; i++) {
+	discipline.options[discipline.options.length] = disciplines1[i];
+      currentSchool = 1;
+      currentSchoolAbbrev="ARC";
+      }
+    }
+    // school 2
+    else if (checked == 1 && cidgroup.length == 3) {
+      //alert ("doing school 2");
+      for (i = 0; i < disciplines2.length; i++) {
+	discipline.options[discipline.options.length] = disciplines2[i];
+      currentSchool = 2;
+      currentSchoolAbbrev="CSUC";
+      }
+    }
+    // All campuses
+    else {
+      for (i = 0; i < disciplinesall.length; i++) {
+	discipline.options[discipline.options.length] = disciplinesall[i];
+      currentSchool = 3;
+      currentSchoolAbbrev="all";
+      }
+    }
+
+    if (discipline.options.length == 1)
+       discipline.disabled = true;
+    else
+       discipline.disabled = false;
+
+    subdrop.options.length = 0;
+    subdrop.options[0] = new Option("Select a C-ID Sub-Discipline", 0);
+    subdrop.disabled = true;
+  }
+</script>
+
+
+   <!-- and now the left sidebar -->
+   <!-- Statically generated by Cacher.pl: Friday May 30 2014 17:56:12 -->
+<!-- $Id: sidebarLeft.html,v 1.12.2.1 2013/03/15 01:44:34 bhoogerb Exp $ -->
+
+
+
+<div id="sitenav"><img src="images/logo_white1.gif" alt="ASSIST" width="160" height="70" border="0" usemap="#Map"> 
+  <map name="Map">
+
+    <area shape="rect" coords="3,1,160,68" href="/">
+
+  </map>
+
+  <p>&nbsp;</p>
+
+  <p><a href="/">Home</a></p>
+
+ <div id="sidebar_head"><img src="images/tabhead_gold2.gif" alt="About ASSIST" width="161" height="20"></div>
+
+<a href="help/help-faq.html"  onMouseOver="showHelpDiv('helptextFAQ')" onMouseOut="hideHelpDiv('helptextFAQ')"> FAQs</a> <a href="help/help-using_assist.html"  onMouseOver="showHelpDiv('helptextUSING')" onMouseOut="hideHelpDiv('helptextUSING')">Using ASSIST</a> 
+<a href="help/help-what_is_assist.html"  onMouseOver="showHelpDiv('helptextWHATIS')" onMouseOut="hideHelpDiv('helptextWHATIS')">What is ASSIST?</a> 
+  </p>
+  <div id="sidebar_head"><img src="images/tabhead_blue2.gif" alt="Help Topics" width="161" height="20"></div>
+  <p>
+
+<a href="help/help-artic.html"  onMouseOver="showHelpDiv('helptextARTIC')" onMouseOut="hideHelpDiv('helptextARTIC')">Articulation Agreements</a> 
+    <!-- 	<a href="a-g_courses.htm" onMouseOver="showHelpDiv('helptextAG')" onMouseOut="hideHelpDiv('helptextAG')">Comm College a-g Courses</a> -->
+
+<a href="help/help-cid.html"  onMouseOver="showHelpDiv('helptextCID')" onMouseOut="hideHelpDiv('helptextCID')">C-ID</a> 
+<a href="help/help-csu_am_ideals.html"  onMouseOver="showHelpDiv('helptextAMINST')" onMouseOut="hideHelpDiv('helptextAMINST')">CSU American Ideals</a> 
+<a href="help/help-csu_ge.html"  onMouseOver="showHelpDiv('helptextCSUGE')" onMouseOut="hideHelpDiv('helptextCSUGE')">CSU GE-Breadth</a>  
+<a href="help/help-majors.html"  onMouseOver="showHelpDiv('helptextMPE')" onMouseOut="hideHelpDiv('helptextMPE')"> Exploring Majors</a>
+<a href="help/help-igetc.html"  onMouseOver="showHelpDiv('helptextIGETC')" onMouseOut="hideHelpDiv('helptextIGETC')">IGETC</a> 
+<a href="help/help-transferable_courses.html"  onMouseOver="showHelpDiv('helptextTRANSCRS')" onMouseOut="hideHelpDiv('helptextTRANSCRS')">Transferable Courses</a> 
+<a href="help/help-uc_trans_admis.html"  onMouseOver="showHelpDiv('helptextUCTRANS')" onMouseOut="hideHelpDiv('helptextUCTRANS')">UC Transfer Admis Eligibility</a> </p>
+  <div id="sidebar_head"><img src="images/tabhead_orange2.gif" alt="Related Information" width="161" height="20"></div>
+<a href="help/help-infocenter.html"  onMouseOver="showHelpDiv('helptextinfocenter')" onMouseOut="hideHelpDiv('helptextinfocenter')">ASSIST Information Center</a>
+<a href="help/help-csu_admis.html"  onMouseOver="showHelpDiv('helptextCSUADM')" onMouseOut="hideHelpDiv('helptextCSUADM')">CSU Admissions</a> <a href="help/help-financial_aid.html"  onMouseOver="showHelpDiv('helptextAID')" onMouseOut="hideHelpDiv('helptextAID')">Financial Aid</a> <a href="help/help-gen_advising.html"  onMouseOver="showHelpDiv('helptextADVIS')" onMouseOut="hideHelpDiv('helptextADVIS')">General Advising</a> <a href="help/help-international_trans.html"  onMouseOver="showHelpDiv('helptextINTERNA')" onMouseOut="hideHelpDiv('helptextINTERNA')">International Transfer</a>
+<a href="help/help-interstate_trans.html" onMouseOver="showHelpDiv('helptextINTERST')" onMouseOut="hideHelpDiv('helptextINTERST')">Interstate Transfer</a> <a href="help/help-private_insts.html"  onMouseOver="showHelpDiv('helptextPRIV')" onMouseOut="hideHelpDiv('helptextPRIV')">Private Institutions</a>
+<a href="help/help-related_sites.html"  onMouseOver="showHelpDiv('helptextSITES')" onMouseOut="hideHelpDiv('helptextSITES')">Related Sites</a>
+<a href="help/help-schedules.html"  onMouseOver="showHelpDiv('helptextSCHEDS')" onMouseOut="hideHelpDiv('helptextSCHEDS')">Schedules and Catalogs</a> 
+<a href="help/help-transcripts.html"  onMouseOver="showHelpDiv('helptextTRANSC')" onMouseOut="hideHelpDiv('helptextTRANSC')">Transcripts</a> 
+<a href="help/help-uc_admis.html"  onMouseOver="showHelpDiv('helptextUCADM')" onMouseOut="hideHelpDiv('helptextUCADM')">UC Admissions</a> </p>
+<!--
+  <div id="sidebar_head"><img src="images/tabhead_green2.gif" alt="Feedback" width="161" height="20"></div>
+  <p>
+    <a href="http://www.assist.org/WaReps_2/transfer_denied.html" target="_blank" onMouseOver="showHelpDiv('helptextCRSTRANS')" onMouseOut="hideHelpDiv('helptextCRSTRANS')">Course Didn't Transfer?</a> 
+
+    <a href="http://www.assist.org/WaReps_2/Feedback.html" target="_blank" onMouseOver="showHelpDiv('helptextGENCOM')" onMouseOut="hideHelpDiv('helptextGENCOM')">General Comments</a><br><br> </p>
+-->
+
+  <p>&nbsp;</p>
+
+  </div>
+
+
+   <!-- right sidebar here -->
+   <!-- $Id: sidebarRight.html,v 1.18.4.2 2013/03/15 01:44:34 bhoogerb Exp $ -->
+
+
+<div id="sidebar">
+  <h4>More Information</h4>
+
+  <div class="helpsidebar" id="helptextDefault" style="visibility: visible;">
+ASSIST does not take the place of a counselor on your campus. It is
+intended to help students and counselors work together to establish an
+appropriate path toward transferring from a public California community college to a public California university.
+</div>
+  <div class="helpsidebar" id="helptextMPE"> Exploring majors allows you to investigate majors offered at University of 
+California and California State University campuses. It provides several paths you can take to learn 
+about specific majors, requirements for majors, major preparation at community colleges and transferring 
+to UC and CSU. Click the link for more details. To begin exploring majors, choose the Explore Majors 
+button in the center of the page. </div>
+  
+  <div class="helpsidebar" id="helptextWHATIS"> ASSIST is intended to facilitate 
+    transfer from a California Community College to a University of California 
+    or California State University campus. You can use ASSIST to see lists of 
+    community college courses that are applicable to transfer, and you can see 
+    articulation agreements that show how courses at one institution might be 
+    used to fulfill lower division requirements at another institution. <br>
+    <br>
+    You can also use ASSIST to explore majors offered at the University of California 
+    and California State University and to display a variety of information to 
+    help you prepare for a major when you transfer. Click the link for more details. 
+  </div>
+
+  <div class="helpsidebar" id="helptextUSING"> To start using ASSIST, choose Explore Transfer Information or Explore Majors. 
+If you select Explore Transfer Information, you must choose an institution from the selection list. You can 
+choose the institution you now attend or the institution you plan to attend. Once you have made your selection, you will be 
+presented with articulation agreement and course lists choices available for your institution. Click the link for more details. </div>
+
+  <div class="helpsidebar" id="helptextFAQ"> Click the link to see answers to frequently asked questions. </div> 
+ 
+  <div class="helpsidebar" id="helptextTRANSCRS"> A transferable course is a course 
+    taken at one college or university that can be used for credit at another 
+    institution. Transferable courses may be used for major preparation, general 
+    education, or elective credit. ASSIST includes two reports that show transferable 
+    courses, one for UC and one for CSU. To see transferable courses, start by 
+    choosing a community college. </div>
+  
+  <div class="helpsidebar" id="helptextARTIC"> An articulated course is a course taken at one college or university that can be used to 
+satisfy a subject matter requirement at another college or university. To see articulation agreements, start by 
+choosing a college or university. Click the link for more details. </div>
+
+  <div class="helpsidebar" id="helptextIGETC"> The Intersegmental General Education 
+    Transfer Curriculum (IGETC) defines a pattern of community college courses 
+    that may be used to fulfill lower division general education requirements 
+    at both the University of California and California State Universities. There 
+    may be some limitations. Click the link for more details. To see a list of 
+    IGETC applicable courses, start by choosing a community college.</div>
+  
+  <div class="helpsidebar" id="helptextinfocenter"> The ASSIST Information Center 
+    is the Web site for ASSIST managers, data entry personnel, and others who 
+    are involved in maintaining the information in ASSIST. Click the link for 
+    more information. </div>
+
+  <div class="helpsidebar" id="helptextCSUGE"> CSU GE-Breadth Certification defines 
+    a pattern of courses that may be used to fulfill lower division general education 
+    requirements at any California State University campus. Click the link for 
+    more details. To see a list of these courses, start by choosing a community 
+    college. </div>
+  
+  <div class="helpsidebar" id="helptextUCTRANS"> UC Transfer Admissions Eligibility 
+    courses define the pattern of coursework transfer students must take to be 
+    eligible for admission to the University of California from a California community 
+    college. Click the link for more details. To see a list of these courses, 
+    start by choosing a community college. </div>
+
+  <div class="helpsidebar" id="helptextAG">  </div>
+  
+  <div class="helpsidebar" id="helptextAMINST"> The California State University 
+    requires students to complete coursework which addresses United States History, 
+    Constitution, and American Ideals. This is a graduation requirement for CSU 
+    students, but the requirement may be completed at the community college prior 
+    to transfer. Click the link for more details. To see a list of these courses, 
+    start by choosing a community college. </div>
+ 
+  <div class="helpsidebar" id="helptextCID">
+C-ID - Course Identification Numbering System.  
+C-ID is a supplemental common course numbering system aimed at helping students and faculty identify courses across institutions that fulfill associate or baccalaureate degree requirements. 
+Click the link for more details.
+ </div>
+
+  <div class="helpsidebar" id="helptextADVIS"> ASSIST is not associated with a 
+    single college or university but provides general information for all public 
+    institutions in California. Since there are many variables involved in providing 
+    guidance for an individual student, we don't provide academic or career counseling. 
+    Your counselor at your community college or an admissions or departmental 
+    advisor at the university you plan to attend are best prepared to answer your 
+    specific questions. </div>
+
+  <div class="helpsidebar" id="helptextCSUADM"> For information about admission 
+    to the California State University, including GPA requirements, admissions 
+    criteria, and application deadlines, consult CSU's online application system. 
+    The online system also provides links to the individual CSU campuses if you 
+    have a more specific question. Click the link for more information. </div>
+
+  <div class="helpsidebar" id="helptextUCADM"> For information about admission 
+    to the University of California, including GPA requirement, admissions criteria, 
+    and application deadlines, consult Pathways, UC's online application system. 
+    The online system provides links to individual UC campuses if you have a more 
+    specific question. Click the link for more information. </div>
+
+  <div class="helpsidebar" id="helptextINST1"> Choose an institution from this 
+    selection list. You can choose the institution you now attend or the institution 
+    you plan to attend.</div>
+
+  <div class="helpsidebar" id="helptextAY"> From this list, choose the academic year for the articulation 
+  agreement you would like to see. </div> 
+
+  <div class="helpsidebar" id="helptextINST2"> Choose a second institution for the articulation agreement from this selection list.</div>
+
+
+  <div class="helpsidebar" id="helptextINTERST"> ASSIST is intended to facilitate 
+    transfer from a California Community College to a University of California 
+    or California State University campus. There is no information in ASSIST concerning 
+    transfer from or to out-of-state colleges or universities. For information 
+    on out-of-state institutions, contact the admissions office at the institution 
+    you plan to attend. </div>
+
+  <div class="helpsidebar" id="helptextINTERNA"> ASSIST is intended to facilitate 
+    transfer from a California Community College to the University of California 
+    or California State University campus. There is no information concerning 
+    transfer from or to universities in other countries. For information on international 
+    transfer, contact the international student center at the institution you 
+    plan to attend. </div>
+
+  <div class="helpsidebar" id="helptextPRIV"> ASSIST is intended to facilitate 
+    transfer from a California Community College to the University of California 
+    or California State University campus. There is no information concerning 
+    transfer from or to private institutions. For information about private institutions, 
+    contact the admissions office at the institution you plan to attend. </div>
+
+  <div class="helpsidebar" id="helptextAID"> ASSIST does not provide information regarding financial aid. For information regarding 
+financial aid, contact the Financial Aid office at the institution you plan to attend. </div>
+
+  <div class="helpsidebar" id="helptextSCHEDS"> ASSIST is not associated with 
+    a single college or university but provides general information for all public 
+    institutions in California. ASSIST does not contain information about class 
+    schedules or catalogs. To find that information online, go to the campus Web 
+    site. Click the link to find links to campus Web sites. </div>
+
+  <div class="helpsidebar" id="helptextTRANSC"> ASSIST does not provide information regarding transcripts and cannot provide you a 
+copy of your transcripts. For information regarding transcripts, contact the Registrar's Office at your college or university. </div>
+
+  <div class="helpsidebar" id="helptextSITES"> Click the link for a list of links to related sites.</div>
+
+  <div class="helpsidebar" id="helptextGENCOM"> Do you have a comment or question? We welcome your feedback about your experience with ASSIST. 
+Click here to provide us with your feedback or question. Please be sure to include your e-mail address if you are interested 
+in a response. </div>
+
+  <div class="helpsidebar" id="helptextCRSTRANS"> Did your courses transfer as expected? We are interested in hearing from you if you believe 
+you did not receive appropriate transfer credit for any course. Click here to provide us with information about your 
+situation. Please be sure to fill out the form completely. </div>
+
+  <div class="helpsidebar" id="helptextbydept_csutca"> Select a single department, or scroll to the bottom of the list to select all departments.</div>
+
+  <div class="helpsidebar" id="helptextbydept_csuge"> Select a single department, or scroll to the bottom of the list to select all departments.</div>
+
+  <div class="helpsidebar" id="helptextbyarea_csuge"> Click to select a single GE certification area, or scroll to the bottom to select all areas.</div>
+
+  <div class="helpsidebar" id="helptextbydept_igetc"> Select a single department, or scroll to the bottom of the list to select all departments.</div>
+
+  <div class="helpsidebar" id="helptextbyarea_igetc"> Click to select a single GE certification area, or scroll to the bottom to select all areas.</div>
+
+  <div class="helpsidebar" id="helptextbydept_uctca"> Select a single department, or scroll to the bottom of the list to select all departments.</div>
+
+  <div class="helpsidebar" id="helptextbyarea_ucelig"> Click to select a single subject area, or scroll to the bottom to select all areas.</div>
+
+  <div class="helpsidebar" id="helptextCHOOSEMAJOR"> You can choose to see the 
+    articulation for a single major, or scroll to the bottom to select all majors. 
+    An All Majors report may take several minutes. </div>
+
+  <div class="helpsidebar" id="helptextDEPT_REC_INST"> You can choose to see the 
+    articulation for a single department at the receiving institution, or scroll 
+    to the bottom to select all departments. An All Departments report may take 
+    several minutes.</div>
+
+  <div class="helpsidebar" id="helptextDEPT_SEND_INST"> You can choose to see 
+    the articulation for a single department at the sending institution, or scroll 
+    to the bottom to select all departments. An All Departments report may take 
+    several minutes.</div>
+
+  <div class="helpsidebar" id="helptextFOR_GE"> Click the link to see articulation 
+    for the local general education requirements at the receiving institution. 
+  </div>
+
+  <div class="helpsidebar" id="helptext1">  
+  Click to see the courses at the selected California community college that are transferable for unit credit to any 
+  California State University campus. You will be able to select a single department or all departments. </div>
+  
+  <div class="helpsidebar" id="helptext2">
+  Click to see the courses at the selected California community college that can be used to complete the CSU GE-Breadth 
+  Certification. You will be able to see the courses organized by department or by area. </div>
+
+  <div class="helpsidebar" id="helptext3"> Click to see the courses at the selected 
+    California community college that can be used to complete the CSU US History, 
+    Constitution, and American Ideals graduation requirement.</div>
+
+  <div class="helpsidebar" id="helptext4">
+  a-g Freshman admissions courses for CSU 
+</div>
+
+  <div class="helpsidebar" id="helptext5">
+  a-g Freshman admissions courses for UC 
+</div>
+
+  <div class="helpsidebar" id="helptext6">
+  Click to see the courses at the selected California community college that can be used to complete IGETC certification. 
+  You will be able to see the courses organized by department or by area.</div>
+
+  <div class="helpsidebar" id="helptext7">
+
+  Click to see the courses at the selected California community college that are transferable for unit credit to any 
+  University of California campus. You will be able to select a single department or all departments. </div>
+
+  <div class="helpsidebar" id="helptextCidDiscipline">
+C-ID is a supplemental common course numbering system aimed at helping students and faculty identify courses across institutions that fulfill associate or baccalaureate degree requirements. 
+  Click to see the C-ID course designators for the selected C-ID discipline. </div>
+
+  <div class="helpsidebar" id="helptextCidSubDiscipline">
+C-ID is a supplemental common course numbering system aimed at helping students and faculty identify courses across institutions that fulfill associate or baccalaureate degree requirements.
+  Click to see the C-ID course designators for the selected C-ID discipline and subdiscipline. </div>
+
+  <div class="helpsidebar" id="helptextCid">
+C-ID is a supplemental common course numbering system aimed at helping students and faculty identify courses across institutions that fulfill associate or baccalaureate degree requirements. 
+  Click to see the C-ID course designators for the selected institution and academic year. </div>
+
+  <div class="helpsidebar" id="helptextCidDept">
+C-ID is a supplemental common course numbering system aimed at helping students and faculty identify courses across institutions that fulfill associate or baccalaureate degree requirements. 
+  Click to see the C-ID course designators for the selected department.</div>
+
+  <div class="helpsidebar" id="helptext8">
+  Click to see the courses at the selected California community college that can be used to fulfill the minimum UC 
+  transfer admissions eligibility requirements. You will be able to select a single subject area, or all areas. </div>
+
+</div>
+
+
+
+
+  </body>
+</html>
+
+

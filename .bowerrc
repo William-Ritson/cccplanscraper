@@ -1,0 +1,6 @@
+{
+    "directory": "static/bower_modules",
+    "json": "bower.json",
+    "proxy": "http://<host>:<port>",
+    "https-proxy": "http://<host>:<port>"
+}

@@ -1,0 +1,24 @@
+{
+  "name": "cccplan",
+  "version": "0.0.0",
+  "homepage": "https://github.com/William-Ritson/cccplan",
+  "description": "An app to help CCC studnets",
+  "main": "server.js",
+  "keywords": [
+    "CCC",
+    "Community",
+    "College"
+  ],
+  "authors": [
+    "William Ritson"
+  ],
+  "license": "All Rights Reserved",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
