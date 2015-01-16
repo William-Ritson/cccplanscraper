@@ -4,8 +4,45 @@ var http = require('http'),
     cheerio = require('cheerio'),
     dbin = require('../data/dbinput.js'),
     url = 'http://web1.assist.org/web-assist/articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=CSUC&dir=1',
+    urlTemplate = 'http://web1.assist.org/web-assist/articulationAgreement.do?inst1=none&inst2=none&ia=ARC&ay=14-15&oia=%&dir=1',
     cacheDir = './cache/assist/',
     fn = cacheDir + 'assist-index.html';
+
+var identifyMajor = function (title) {
+    if (title.match(/B\.?\s*A/i)) {
+        return 'Bachelor of Arts';
+    } else if (title.match(/B\.?\s*S/i)) {
+        return 'Bachelor of Sciences';
+    } else {
+        return 'Other';
+    }
+};
+
+var getMajors = function ($) {
+    var select = $('.major option'),
+        results = [];
+
+    select.each(function (index) {
+        var item = $(this),
+            title = item.text().replace(/to:/i, '').replace('\n', ' ').trim(),
+            idRaw = item.val(),
+            type = identifyMajor(title),
+            id;
+
+        if (idRaw.length > 0 && idRaw !== '-1') {
+            id = idRaw.trim();
+            results.push({
+                title: title,
+                id: id,
+                type: type
+            });
+            console.log('index:', index, 'id:', id, 'title:', title, 'type:', type);
+        }
+    });
+
+    return results;
+};
+
 
 var identifyType = function (title) {
     if (title.match(/University of California/i)) {
@@ -28,7 +65,7 @@ var getSelect = function ($, identifier, typeMatcher) {
 
     select.each(function (index) {
         var item = $(this),
-            title = item.text().replace('\n', ' ').trim(),
+            title = item.text().replace(/to:/i, '').replace('\n', ' ').trim(),
             idRaw = item.val().match(new RegExp('&' + identifier + '=([A-Z]+)')),
             type = typeMatcher(title),
             id;
@@ -47,72 +84,37 @@ var getSelect = function ($, identifier, typeMatcher) {
     return results;
 };
 
-var identifyMajor = function (title) {
-    return 'BA';
-};
-
-var getMajors = function ($) {
-
-};
-
-var getFrom = function ($) {
-    var fromSelect = $('#ia option'),
-        results = [];
-
-    fromSelect.each(function (index) {
-        var item = $(this),
-            title = item.text().replace('\n', ' ').trim(),
-            idRaw = item.val().match(/&ia=([A-Z]+)/),
-            type = identifyType(title),
-            id;
-
-        if (idRaw !== null) {
-            id = idRaw[1];
-            results.push({
-                title: title,
-                id: id,
-                type: type
-            });
-            //console.log('index:', index, "id:", id, "title:", title);
-        }
-    });
-
-    return results;
-};
-
 var getFrom = function ($) {
     return getSelect($, 'ia', identifyType);
 };
 
-var makeTo = function ($) {
-    var toSelect = $('#oia option'),
-        results = [];
+var getTo = function ($) {
+    return getSelect($, 'oia', identifyType);
+};
 
-    toSelect.each(function (index) {
-        var item = $(this),
-            title = item.text().replace(/to:/i, '').replace('\n', ' ').trim(),
-            idRaw = item.val().match(/&oia=([A-Z]+)/),
-            type = identifyType(title),
-            id;
 
-        if (idRaw !== null) {
-            id = idRaw[1];
-            results.push({
-                title: title,
-                id: id,
-                type: type
-            });
-            console.log('index:', index, "id:", id, "title:", title);
-        }
+
+var makeMajors = function (to, callback) {
+    var count = 0;
+    to.forEach(function (school) {
+        request(urlTemplate.replace('%', school.id), function (error, response, body) {
+            var $ = cheerio.load(body);
+            school.major = getMajors($);
+            count++;
+
+            console.log('Got majors for', school.id, '(', count, '/', to.length, ')');
+            if (count === to.length) {
+                callback(to);
+            }
+        });
     });
-
-    return results;
 };
 
 var processData = function (error, body) {
     if (error) {
         console.error(error);
     } else {
+        fs.writeFileSync(fn, body);
         var result = {
                 to: [],
                 from: []
@@ -120,11 +122,11 @@ var processData = function (error, body) {
             $ = cheerio.load(body);
 
         result.from = getFrom($);
-        result.to = makeTo($);
+        result.to = getTo($);
 
-        fs.writeFileSync(fn, body);
-        fs.writeFileSync(cacheDir + 'assist-index.json', JSON.stringify(result));
-        return result;
+        makeMajors(result.to, function () {
+            fs.writeFileSync(cacheDir + 'assist-index.json', JSON.stringify(result));
+        });
     }
 };
 

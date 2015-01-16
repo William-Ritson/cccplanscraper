@@ -1,20 +1,18 @@
-var MongoClient = require('mongodb').MongoClient,
-    dbConnection = 'mongodb://127.0.0.1:27017/cccPlanDb';
+var db = require('./db.js');
 
-module.exports.store = function (item, collectionName) {
-    MongoClient.connect(dbConnection, function (err, db) {
+module.exports.storeAgreement = function (agreement) {
+    db.getConnection(function (err, db) {
         if (err) {
             throw err;
         }
 
-        var collection = db.collection(collectionName);
+        var collection = db.collection('agreements');
 
-        collection.insert(item, function (errr, docs) {
+        collection.insert(agreement, function (err, docs) {
             if (err) {
                 throw err;
             }
-            console.log('inserted item', item, 'into', collectionName);
-            db.close();
+            console.log('inserted agreement');
         });
 
     });
@@ -26,7 +24,7 @@ module.exports.storeClass = function (items) {
         return;
     }
     console.log('store class', item.id);
-    MongoClient.connect(dbConnection, function (err, db) {
+    db.getConnection(function (err, db) {
         if (err) {
             console.error(err);
         }
@@ -79,24 +77,5 @@ module.exports.storeClass = function (items) {
                 });
             }
         });
-    });
-};
-
-module.exports.storeAgreement = function (agreement) {
-    MongoClient.connect(dbConnection, function (err, db) {
-        if (err) {
-            throw err;
-        }
-
-        var collection = db.collection('agreements');
-
-        collection.insert(agreement, function (err, docs) {
-            if (err) {
-                throw err;
-            }
-            console.log('inserted agreement');
-            db.close();
-        });
-
     });
 };

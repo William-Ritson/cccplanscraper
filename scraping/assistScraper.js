@@ -27,9 +27,9 @@ console.log('ids', 'to:', ids.to.length, 'from: ', ids.from.length);
 
 var incrementQuery = function (query, first) {
     var limits = [
-        ['from', ids.from[query.count.from].length],
+        ['from', ids.from.length],
         ['major', ids.to[query.count.to].major.length],
-        ['to', ids.to[query.count.to].length],
+        ['to', ids.to.length],
         ['end', 1]
     ];
     if (first !== true) {
@@ -61,6 +61,8 @@ var buildQuery = function (query) {
     return query;
 };
 
+
+
 var runQuery = function (query) {
     var nextQ = query.next,
         major = nextQ.major.id,
@@ -73,7 +75,11 @@ var runQuery = function (query) {
 
     cli.progress(query.done / query.total);
 
-    console.log('Query', fromSchool, 'to', toSchool, 'major', major, '(', query.done, '/', query.total, ')');
+    console.log('Query', fromSchool, 'to', toSchool, 'major', major);
+    console.log('Done:', '(', query.done, '/', query.total, ')',
+        'Suceeded:', '(', query.successes, '/', query.total, ')',
+        'Errors:', '(', query.errors, '/', query.total, ')',
+        'Empty:', '(', query.empty, '/', query.total, ')');
 
     var options = [
         ['aay', '13-14'],
@@ -96,11 +102,8 @@ var runQuery = function (query) {
 
 
     request(url, function (error, response, body) {
-        console.log('query done');
         if (!error) {
             var fn = 'cache/assist/agreements/' + fromSchool + 'to' + toSchool + 'in' + major + '.html';
-
-            console.log('ok', fromSchool, 'to', toSchool, 'major', major, 'STATUS: ' + response.statusCode);
 
             var data = {
                 from: nextQ.from,
@@ -111,14 +114,17 @@ var runQuery = function (query) {
                 scrapedDate: new Date()
             };
 
-            fs.writeFileSync('cache/assist/agreements/' + fromSchool + 'to' + toSchool + 'in' + major + '.json',
-                JSON.stringify(data));
-
-
+            if (body.indexOf('ASSIST was not able to process your request') === -1) {
+                fs.writeFileSync('cache/assist/agreements/' + fromSchool + 'to' + toSchool + 'in' + major + '.json',
+                    JSON.stringify(data));
+                query.successes++;
+            } else {
+                query.empty += 1;
+            }
             //         dbin.storeAgreement();
 
         } else {
-            console.log('error', fromSchool, 'to', toSchool, 'major', major, 'STATUS: ' + error);
+            query.errors++;
         }
 
         var next = incrementQuery(query, false);
@@ -128,6 +134,22 @@ var runQuery = function (query) {
             runQuery(buildQuery(query));
         }
     });
+};
+
+var limit = 4;
+var startNext = function (query) {
+    if (query.running.length < limit) {
+        var next = incrementQuery(query, false);
+
+        query.running.push(next);
+        query.last = next;
+
+        fs.writeFileSync('cache/assist/resume.json', JSON.stringify(query));
+
+        if (next) {
+            runQuery(buildQuery(next));
+        }
+    }
 };
 
 
@@ -145,6 +167,7 @@ module.exports.run = function () {
     var query;
     if (fs.existsSync(resumeFN)) {
         query = JSON.parse(fs.readFileSync(resumeFN));
+        incrementQuery(query, true);
     } else {
         query = {
             count: {
@@ -153,6 +176,8 @@ module.exports.run = function () {
                 major: 0
             },
             done: 0,
+            successes: 0,
+            errors: 0,
             total: getTotal(),
             next: {}
         };
